@@ -27,7 +27,7 @@
     },
     {
       "name": "collection",
-      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/collection-1.17.2",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/collection-1.18.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -45,9 +45,9 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///nix/store/akh7ysp7y0adrgy20wvwlx8ma7z7d4s3-flutter-3.13.8-unwrapped/packages/flutter",
+      "rootUri": "file:///nix/store/5llkahyq1p04wm2j260gzba69nkqy2xb-flutter-wrapped-3.24.4-sdk-links/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "flutter_lints",
@@ -57,9 +57,27 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///nix/store/akh7ysp7y0adrgy20wvwlx8ma7z7d4s3-flutter-3.13.8-unwrapped/packages/flutter_test",
+      "rootUri": "file:///nix/store/5llkahyq1p04wm2j260gzba69nkqy2xb-flutter-wrapped-3.24.4-sdk-links/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "leak_tracker",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/leak_tracker-10.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "leak_tracker_flutter_testing",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "leak_tracker_testing",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/leak_tracker_testing-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
     },
     {
       "name": "lints",
@@ -69,33 +87,33 @@
     },
     {
       "name": "matcher",
-      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/matcher-0.12.16",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/matcher-0.12.16+1",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.0"
     },
     {
       "name": "material_color_utilities",
-      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/material_color_utilities-0.5.0",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/material_color_utilities-0.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "meta",
-      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/meta-1.9.1",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/meta-1.15.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "path",
-      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/path-1.8.3",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/path-1.9.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///nix/store/akh7ysp7y0adrgy20wvwlx8ma7z7d4s3-flutter-3.13.8-unwrapped/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///nix/store/5llkahyq1p04wm2j260gzba69nkqy2xb-flutter-wrapped-3.24.4-sdk-links/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "source_span",
@@ -105,15 +123,15 @@
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "stream_channel",
-      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/stream_channel-2.1.1",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/stream_channel-2.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "string_scanner",
@@ -129,9 +147,9 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/test_api-0.6.0",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/test_api-0.7.2",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.2"
     },
     {
       "name": "vector_math",
@@ -140,10 +158,10 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "web",
-      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/web-0.1.4-beta",
+      "name": "vm_service",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/vm_service-14.2.5",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.3"
     },
     {
       "name": "automaat_app",
@@ -152,7 +170,10 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2024-12-08T12:30:36.103715Z",
+  "generated": "2024-12-08T12:52:50.791340Z",
   "generator": "pub",
-  "generatorVersion": "3.1.4"
+  "generatorVersion": "3.5.4",
+  "flutterRoot": "file:///nix/store/5llkahyq1p04wm2j260gzba69nkqy2xb-flutter-wrapped-3.24.4-sdk-links",
+  "flutterVersion": "3.24.4",
+  "pubCache": "file:///home/jordy/.pub-cache"
 }
