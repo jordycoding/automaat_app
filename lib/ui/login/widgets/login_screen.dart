@@ -57,7 +57,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   FilledButton(onPressed: () {}, child: const Text("Login")),
                   SizedBox(width: 10),
                   OutlinedButton(
-                      onPressed: () {}, child: const Text("Register"))
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/register");
+                      },
+                      child: const Text("Register"))
                 ],
               )
             ],
