@@ -1,7 +1,5 @@
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:flutter/material.dart';
-import "ui/login/widgets/login_screen.dart";
-import "routing/app_routes.dart";
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +32,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: AppRoutes.login,
+        initialRoute: AppRoutes.carList,
         routes: AppRoutes.getRoutes());
   }
 }

@@ -30,7 +30,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headlineMedium),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               TextFormField(
                 decoration: const InputDecoration(
                     border: UnderlineInputBorder(), labelText: "Username"),

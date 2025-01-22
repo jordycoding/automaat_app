@@ -17,7 +17,7 @@ class AuthApiClient {
             request.write(registerRequest.toJson());
             final response = await request.close();
             if (response.statusCode == 201) {
-                return Result.ok(());
+                return const Result.ok(());
             } else {
             return Result.error(Exception("Failed to register"));
             }

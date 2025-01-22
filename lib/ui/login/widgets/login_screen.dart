@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headlineMedium),
               ),
-              SizedBox(height: 24),
+              const SizedBox(height: 24),
               TextFormField(
                   decoration: const InputDecoration(
                       border: UnderlineInputBorder(), labelText: "Username"),
@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   FilledButton(onPressed: () {}, child: const Text("Login")),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   OutlinedButton(
                       onPressed: () {
                         Navigator.pushNamed(context, "/register");
