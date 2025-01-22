@@ -5,6 +5,12 @@ gradle-wrapper.jar
 /gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
+.dart_tool/
+.pub/
+build/
+.idea/
+*.iml
+pubspec.lock
 
 # Remember to never publicly share your keystore.
 # See https://flutter.dev/to/reference-keystore
