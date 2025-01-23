@@ -1,6 +1,7 @@
 import 'package:automaat_app/data/repositories/auth/auth_repository.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/car_list/car_list_screen.dart';
+import 'package:automaat_app/ui/login/view_models/login_viewmodel.dart';
 import 'package:automaat_app/ui/login/widgets/login_screen.dart';
 import 'package:automaat_app/ui/register/view_models/register_viewmodel.dart';
 import 'package:automaat_app/ui/register/widgets/register_screen.dart';
@@ -17,7 +18,11 @@ GoRouter router(
           GoRoute(
             path: AppRoutes.login,
             builder: (context, state) {
-              return LoginScreen();
+              return LoginScreen(
+                viewModel: LoginViewmodel(
+                  authRepository: context.read(),
+                ),
+              );
             },
           ),
           GoRoute(
