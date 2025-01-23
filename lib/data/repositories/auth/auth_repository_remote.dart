@@ -61,6 +61,7 @@ class AuthRepositoryRemote extends AuthRepository {
       switch (result) {
         case Ok<LoginResponse>():
           _log.info("Logged in");
+          _log.info("Token ${result.value.idToken}");
           _isAuthenticated = true;
           _idToken = result.value.idToken;
           return await _sharedPreferencesService

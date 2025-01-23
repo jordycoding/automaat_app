@@ -35,7 +35,7 @@ class AuthApiClient {
     }
   }
 
-  Future<Result<void>> login(LoginRequest loginRequest) async {
+  Future<Result<LoginResponse>> login(LoginRequest loginRequest) async {
     final client = _clientFactory();
     try {
       final request = await client
@@ -45,8 +45,7 @@ class AuthApiClient {
       final response = await request.close();
       if (response.statusCode == 200) {
         final stringData = await response.transform(utf8.decoder).join();
-        final loginResponse = LoginResponse.fromJson(jsonDecode(stringData));
-        return Result.ok(loginResponse);
+        return Result.ok(LoginResponse.fromJson(jsonDecode(stringData)));
         _log.info(stringData);
       } else {
         return const Result.error(HttpException("Login error"));
