@@ -212,6 +212,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "go_router",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/go_router-14.6.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
       "name": "graphs",
       "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/graphs-2.3.2",
       "packageUri": "lib/",
@@ -320,6 +326,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "package_config",
       "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/package_config-2.1.1",
       "packageUri": "lib/",
@@ -364,6 +376,12 @@
     {
       "name": "pool",
       "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/pool-1.5.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///home/jordy/.pub-cache/hosted/pub.dev/provider-6.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -560,7 +578,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2025-01-23T13:46:37.444184Z",
+  "generated": "2025-01-23T14:57:55.221303Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///nix/store/5llkahyq1p04wm2j260gzba69nkqy2xb-flutter-wrapped-3.24.4-sdk-links",

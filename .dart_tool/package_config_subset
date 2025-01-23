@@ -122,6 +122,10 @@ glob
 2.19
 file:///home/jordy/.pub-cache/hosted/pub.dev/glob-2.1.2/
 file:///home/jordy/.pub-cache/hosted/pub.dev/glob-2.1.2/lib/
+go_router
+3.4
+file:///home/jordy/.pub-cache/hosted/pub.dev/go_router-14.6.3/
+file:///home/jordy/.pub-cache/hosted/pub.dev/go_router-14.6.3/lib/
 graphs
 3.4
 file:///home/jordy/.pub-cache/hosted/pub.dev/graphs-2.3.2/
@@ -194,6 +198,10 @@ mime
 3.2
 file:///home/jordy/.pub-cache/hosted/pub.dev/mime-2.0.0/
 file:///home/jordy/.pub-cache/hosted/pub.dev/mime-2.0.0/lib/
+nested
+2.12
+file:///home/jordy/.pub-cache/hosted/pub.dev/nested-1.0.0/
+file:///home/jordy/.pub-cache/hosted/pub.dev/nested-1.0.0/lib/
 package_config
 3.4
 file:///home/jordy/.pub-cache/hosted/pub.dev/package_config-2.1.1/
@@ -226,6 +234,10 @@ pool
 2.12
 file:///home/jordy/.pub-cache/hosted/pub.dev/pool-1.5.1/
 file:///home/jordy/.pub-cache/hosted/pub.dev/pool-1.5.1/lib/
+provider
+2.12
+file:///home/jordy/.pub-cache/hosted/pub.dev/provider-6.1.2/
+file:///home/jordy/.pub-cache/hosted/pub.dev/provider-6.1.2/lib/
 pub_semver
 3.4
 file:///home/jordy/.pub-cache/hosted/pub.dev/pub_semver-2.1.5/

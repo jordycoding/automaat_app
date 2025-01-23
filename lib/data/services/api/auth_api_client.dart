@@ -18,10 +18,11 @@ class AuthApiClient {
     try {
       final request = await client
           .postUrl(Uri.parse("${AppConstants.serverUrl}/AM/register"));
-      request.write(registerRequest.toJson());
+      request.headers.contentType = ContentType.json;
+      request.write(jsonEncode(registerRequest));
       final response = await request.close();
       if (response.statusCode == 201) {
-        return Result.ok("Login successful");
+        return Result.ok(null);
       } else {
         return Result.error(Exception("Failed to register"));
       }
@@ -37,7 +38,7 @@ class AuthApiClient {
     try {
       final request = await client
           .postUrl(Uri.parse("${AppConstants.serverUrl}/authenticate"));
-      request.write(loginRequest);
+      request.write(jsonEncode(loginRequest));
       final response = await request.close();
       if (response.statusCode == 200) {
         final stringData = await response.transform(utf8.decoder).join();

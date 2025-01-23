@@ -1,4 +1,6 @@
+import 'package:automaat_app/routing/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -58,7 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(width: 10),
                   OutlinedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/register");
+                        context.go(AppRoutes.register);
                       },
                       child: const Text("Register"))
                 ],

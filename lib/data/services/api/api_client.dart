@@ -11,11 +11,11 @@ class ApiClient {
 
   AuthHeaderProvider? _authHeaderProvider;
 
-  set AuthHeaderProvider(AuthHeaderProvider? value) {
+  set authHeaderProvider(AuthHeaderProvider? value) {
     _authHeaderProvider = value;
   }
 
-  Future<void> _authHeader(HttpHeaders headers) {
+  Future<void> _authHeader(HttpHeaders headers) async {
     final header = _authHeaderProvider?.call();
     if (header != null) {
       headers.add(HttpHeaders.authorizationHeader, header);

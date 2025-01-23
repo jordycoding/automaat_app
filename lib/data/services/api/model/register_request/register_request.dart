@@ -16,6 +16,6 @@ class RegisterRequest with _$RegisterRequest {
     required String password,
   }) = _RegisterRequest;
 
-  factory RegisterRequest.fromJson(Map<String, dynamic> json) =>
+  factory RegisterRequest.fromJson(Map<String, Object?> json) =>
       _$RegisterRequestFromJson(json);
 }

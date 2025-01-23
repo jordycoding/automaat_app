@@ -12,6 +12,6 @@ class LoginRequest with _$LoginRequest {
       required String password,
       required bool rememberMe}) = _LoginRequest;
 
-  factory LoginRequest.fromJson(Map<String, dynamic> json) =>
+  factory LoginRequest.fromJson(Map<String, Object?> json) =>
       _$LoginRequestFromJson(json);
 }

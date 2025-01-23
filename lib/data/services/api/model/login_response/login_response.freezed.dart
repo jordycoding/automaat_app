@@ -20,7 +20,6 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginResponse {
-  @JsonKey(name: "id_token")
   String get idToken => throw _privateConstructorUsedError;
 
   /// Serializes this LoginResponse to a JSON map.
@@ -39,7 +38,7 @@ abstract class $LoginResponseCopyWith<$Res> {
           LoginResponse value, $Res Function(LoginResponse) then) =
       _$LoginResponseCopyWithImpl<$Res, LoginResponse>;
   @useResult
-  $Res call({@JsonKey(name: "id_token") String idToken});
+  $Res call({String idToken});
 }
 
 /// @nodoc
@@ -76,7 +75,7 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
       __$$LoginResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "id_token") String idToken});
+  $Res call({String idToken});
 }
 
 /// @nodoc
@@ -108,13 +107,12 @@ class __$$LoginResponseImplCopyWithImpl<$Res>
 class _$LoginResponseImpl
     with DiagnosticableTreeMixin
     implements _LoginResponse {
-  const _$LoginResponseImpl({@JsonKey(name: "id_token") required this.idToken});
+  const _$LoginResponseImpl({required this.idToken});
 
   factory _$LoginResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginResponseImplFromJson(json);
 
   @override
-  @JsonKey(name: "id_token")
   final String idToken;
 
   @override
@@ -159,15 +157,13 @@ class _$LoginResponseImpl
 }
 
 abstract class _LoginResponse implements LoginResponse {
-  const factory _LoginResponse(
-          {@JsonKey(name: "id_token") required final String idToken}) =
+  const factory _LoginResponse({required final String idToken}) =
       _$LoginResponseImpl;
 
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =
       _$LoginResponseImpl.fromJson;
 
   @override
-  @JsonKey(name: "id_token")
   String get idToken;
 
   /// Create a copy of LoginResponse
