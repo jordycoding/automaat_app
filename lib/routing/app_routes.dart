@@ -8,12 +8,4 @@ abstract final class AppRoutes {
   static const String login = "/login";
   static const String register = "/register";
   static const String carList = "/car-list";
-
-  // static Map<String, WidgetBuilder> getRoutes() {
-  //   return {
-  //     login: (context) => const LoginScreen(),
-  //     register: (context) => const RegisterScreen(),
-  //     carList: (context) => CarListScreen(),
-  //   };
-  // }
 }
