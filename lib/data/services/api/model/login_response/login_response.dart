@@ -8,7 +8,7 @@ part "login_response.g.dart";
 @freezed
 class LoginResponse with _$LoginResponse {
   const factory LoginResponse({
-    required String idToken,
+    @JsonKey(name: "id_token") required String idToken,
   }) = _LoginResponse;
 
   factory LoginResponse.fromJson(Map<String, Object?> json) =>

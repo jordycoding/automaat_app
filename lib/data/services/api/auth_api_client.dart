@@ -45,8 +45,9 @@ class AuthApiClient {
       final response = await request.close();
       if (response.statusCode == 200) {
         final stringData = await response.transform(utf8.decoder).join();
+        final loginResponse = LoginResponse.fromJson(jsonDecode(stringData));
+        return Result.ok(loginResponse);
         _log.info(stringData);
-        return Result.ok(LoginResponse.fromJson(jsonDecode(stringData)));
       } else {
         return const Result.error(HttpException("Login error"));
       }
