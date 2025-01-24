@@ -1,11 +1,26 @@
 import 'package:automaat_app/config/dependencies.dart';
+import 'package:automaat_app/data/repositories/car_list/car_repository.dart';
+import 'package:automaat_app/data/services/api/car_api_client.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/routing/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MultiProvider(providers: providers, child: const MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ...providers, // Behoud bestaande providers
+        Provider(create: (_) => CarApiClient()), // Voeg toe
+        Provider(
+          create: (context) => CarRepository(
+            context.read<CarApiClient>(),
+          ),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
