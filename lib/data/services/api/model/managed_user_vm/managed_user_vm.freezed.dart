@@ -28,8 +28,8 @@ mixin _$ManagedUserVm {
   String? get imageUrl => throw _privateConstructorUsedError;
   bool get activated => throw _privateConstructorUsedError;
   String get langKey => throw _privateConstructorUsedError;
-  String get createdBy => throw _privateConstructorUsedError;
-  String get createdDate => throw _privateConstructorUsedError;
+  String? get createdBy => throw _privateConstructorUsedError;
+  String? get createdDate => throw _privateConstructorUsedError;
   String? get lastModifiedBy => throw _privateConstructorUsedError;
   String? get lastModifiedDate => throw _privateConstructorUsedError;
   List<String>? get authorities => throw _privateConstructorUsedError;
@@ -60,8 +60,8 @@ abstract class $ManagedUserVmCopyWith<$Res> {
       String? imageUrl,
       bool activated,
       String langKey,
-      String createdBy,
-      String createdDate,
+      String? createdBy,
+      String? createdDate,
       String? lastModifiedBy,
       String? lastModifiedDate,
       List<String>? authorities,
@@ -91,8 +91,8 @@ class _$ManagedUserVmCopyWithImpl<$Res, $Val extends ManagedUserVm>
     Object? imageUrl = freezed,
     Object? activated = null,
     Object? langKey = null,
-    Object? createdBy = null,
-    Object? createdDate = null,
+    Object? createdBy = freezed,
+    Object? createdDate = freezed,
     Object? lastModifiedBy = freezed,
     Object? lastModifiedDate = freezed,
     Object? authorities = freezed,
@@ -131,14 +131,14 @@ class _$ManagedUserVmCopyWithImpl<$Res, $Val extends ManagedUserVm>
           ? _value.langKey
           : langKey // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdDate: null == createdDate
+              as String?,
+      createdDate: freezed == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       lastModifiedBy: freezed == lastModifiedBy
           ? _value.lastModifiedBy
           : lastModifiedBy // ignore: cast_nullable_to_non_nullable
@@ -176,8 +176,8 @@ abstract class _$$ManagedUserVmImplCopyWith<$Res>
       String? imageUrl,
       bool activated,
       String langKey,
-      String createdBy,
-      String createdDate,
+      String? createdBy,
+      String? createdDate,
       String? lastModifiedBy,
       String? lastModifiedDate,
       List<String>? authorities,
@@ -205,8 +205,8 @@ class __$$ManagedUserVmImplCopyWithImpl<$Res>
     Object? imageUrl = freezed,
     Object? activated = null,
     Object? langKey = null,
-    Object? createdBy = null,
-    Object? createdDate = null,
+    Object? createdBy = freezed,
+    Object? createdDate = freezed,
     Object? lastModifiedBy = freezed,
     Object? lastModifiedDate = freezed,
     Object? authorities = freezed,
@@ -245,14 +245,14 @@ class __$$ManagedUserVmImplCopyWithImpl<$Res>
           ? _value.langKey
           : langKey // ignore: cast_nullable_to_non_nullable
               as String,
-      createdBy: null == createdBy
+      createdBy: freezed == createdBy
           ? _value.createdBy
           : createdBy // ignore: cast_nullable_to_non_nullable
-              as String,
-      createdDate: null == createdDate
+              as String?,
+      createdDate: freezed == createdDate
           ? _value.createdDate
           : createdDate // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       lastModifiedBy: freezed == lastModifiedBy
           ? _value.lastModifiedBy
           : lastModifiedBy // ignore: cast_nullable_to_non_nullable
@@ -285,8 +285,8 @@ class _$ManagedUserVmImpl implements _ManagedUserVm {
       this.imageUrl,
       required this.activated,
       required this.langKey,
-      required this.createdBy,
-      required this.createdDate,
+      this.createdBy,
+      this.createdDate,
       this.lastModifiedBy,
       this.lastModifiedDate,
       final List<String>? authorities,
@@ -313,9 +313,9 @@ class _$ManagedUserVmImpl implements _ManagedUserVm {
   @override
   final String langKey;
   @override
-  final String createdBy;
+  final String? createdBy;
   @override
-  final String createdDate;
+  final String? createdDate;
   @override
   final String? lastModifiedBy;
   @override
@@ -414,8 +414,8 @@ abstract class _ManagedUserVm implements ManagedUserVm {
       final String? imageUrl,
       required final bool activated,
       required final String langKey,
-      required final String createdBy,
-      required final String createdDate,
+      final String? createdBy,
+      final String? createdDate,
       final String? lastModifiedBy,
       final String? lastModifiedDate,
       final List<String>? authorities,
@@ -441,9 +441,9 @@ abstract class _ManagedUserVm implements ManagedUserVm {
   @override
   String get langKey;
   @override
-  String get createdBy;
+  String? get createdBy;
   @override
-  String get createdDate;
+  String? get createdDate;
   @override
   String? get lastModifiedBy;
   @override

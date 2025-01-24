@@ -16,8 +16,8 @@ _$ManagedUserVmImpl _$$ManagedUserVmImplFromJson(Map<String, dynamic> json) =>
       imageUrl: json['imageUrl'] as String?,
       activated: json['activated'] as bool,
       langKey: json['langKey'] as String,
-      createdBy: json['createdBy'] as String,
-      createdDate: json['createdDate'] as String,
+      createdBy: json['createdBy'] as String?,
+      createdDate: json['createdDate'] as String?,
       lastModifiedBy: json['lastModifiedBy'] as String?,
       lastModifiedDate: json['lastModifiedDate'] as String?,
       authorities: (json['authorities'] as List<dynamic>?)
