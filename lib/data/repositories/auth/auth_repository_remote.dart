@@ -41,7 +41,7 @@ class AuthRepositoryRemote extends AuthRepository {
 
   @override
   Future<bool> get isAuthenticated async {
-    if (_isAuthenticated == null) {
+    if (_isAuthenticated != null) {
       return _isAuthenticated!;
     }
 
