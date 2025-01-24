@@ -26,6 +26,8 @@ mixin _$CustomerResource {
   String get lastName => throw _privateConstructorUsedError;
   String get from => throw _privateConstructorUsedError;
   ManagedUserVm? get systemUser => throw _privateConstructorUsedError;
+  List<Rental>? get rentals => throw _privateConstructorUsedError;
+  Location? get location => throw _privateConstructorUsedError;
 
   /// Serializes this CustomerResource to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -49,9 +51,12 @@ abstract class $CustomerResourceCopyWith<$Res> {
       String firstName,
       String lastName,
       String from,
-      ManagedUserVm? systemUser});
+      ManagedUserVm? systemUser,
+      List<Rental>? rentals,
+      Location? location});
 
   $ManagedUserVmCopyWith<$Res>? get systemUser;
+  $LocationCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -75,6 +80,8 @@ class _$CustomerResourceCopyWithImpl<$Res, $Val extends CustomerResource>
     Object? lastName = null,
     Object? from = null,
     Object? systemUser = freezed,
+    Object? rentals = freezed,
+    Object? location = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -101,6 +108,14 @@ class _$CustomerResourceCopyWithImpl<$Res, $Val extends CustomerResource>
           ? _value.systemUser
           : systemUser // ignore: cast_nullable_to_non_nullable
               as ManagedUserVm?,
+      rentals: freezed == rentals
+          ? _value.rentals
+          : rentals // ignore: cast_nullable_to_non_nullable
+              as List<Rental>?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Location?,
     ) as $Val);
   }
 
@@ -115,6 +130,20 @@ class _$CustomerResourceCopyWithImpl<$Res, $Val extends CustomerResource>
 
     return $ManagedUserVmCopyWith<$Res>(_value.systemUser!, (value) {
       return _then(_value.copyWith(systemUser: value) as $Val);
+    });
+  }
+
+  /// Create a copy of CustomerResource
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LocationCopyWith<$Res>? get location {
+    if (_value.location == null) {
+      return null;
+    }
+
+    return $LocationCopyWith<$Res>(_value.location!, (value) {
+      return _then(_value.copyWith(location: value) as $Val);
     });
   }
 }
@@ -133,10 +162,14 @@ abstract class _$$CustomerResourceImplCopyWith<$Res>
       String firstName,
       String lastName,
       String from,
-      ManagedUserVm? systemUser});
+      ManagedUserVm? systemUser,
+      List<Rental>? rentals,
+      Location? location});
 
   @override
   $ManagedUserVmCopyWith<$Res>? get systemUser;
+  @override
+  $LocationCopyWith<$Res>? get location;
 }
 
 /// @nodoc
@@ -158,6 +191,8 @@ class __$$CustomerResourceImplCopyWithImpl<$Res>
     Object? lastName = null,
     Object? from = null,
     Object? systemUser = freezed,
+    Object? rentals = freezed,
+    Object? location = freezed,
   }) {
     return _then(_$CustomerResourceImpl(
       id: null == id
@@ -184,6 +219,14 @@ class __$$CustomerResourceImplCopyWithImpl<$Res>
           ? _value.systemUser
           : systemUser // ignore: cast_nullable_to_non_nullable
               as ManagedUserVm?,
+      rentals: freezed == rentals
+          ? _value._rentals
+          : rentals // ignore: cast_nullable_to_non_nullable
+              as List<Rental>?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as Location?,
     ));
   }
 }
@@ -197,7 +240,10 @@ class _$CustomerResourceImpl implements _CustomerResource {
       required this.firstName,
       required this.lastName,
       required this.from,
-      this.systemUser});
+      this.systemUser,
+      final List<Rental>? rentals,
+      this.location})
+      : _rentals = rentals;
 
   factory _$CustomerResourceImpl.fromJson(Map<String, dynamic> json) =>
       _$$CustomerResourceImplFromJson(json);
@@ -214,10 +260,22 @@ class _$CustomerResourceImpl implements _CustomerResource {
   final String from;
   @override
   final ManagedUserVm? systemUser;
+  final List<Rental>? _rentals;
+  @override
+  List<Rental>? get rentals {
+    final value = _rentals;
+    if (value == null) return null;
+    if (_rentals is EqualUnmodifiableListView) return _rentals;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final Location? location;
 
   @override
   String toString() {
-    return 'CustomerResource(id: $id, nr: $nr, firstName: $firstName, lastName: $lastName, from: $from, systemUser: $systemUser)';
+    return 'CustomerResource(id: $id, nr: $nr, firstName: $firstName, lastName: $lastName, from: $from, systemUser: $systemUser, rentals: $rentals, location: $location)';
   }
 
   @override
@@ -233,13 +291,24 @@ class _$CustomerResourceImpl implements _CustomerResource {
                 other.lastName == lastName) &&
             (identical(other.from, from) || other.from == from) &&
             (identical(other.systemUser, systemUser) ||
-                other.systemUser == systemUser));
+                other.systemUser == systemUser) &&
+            const DeepCollectionEquality().equals(other._rentals, _rentals) &&
+            (identical(other.location, location) ||
+                other.location == location));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, nr, firstName, lastName, from, systemUser);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      nr,
+      firstName,
+      lastName,
+      from,
+      systemUser,
+      const DeepCollectionEquality().hash(_rentals),
+      location);
 
   /// Create a copy of CustomerResource
   /// with the given fields replaced by the non-null parameter values.
@@ -265,7 +334,9 @@ abstract class _CustomerResource implements CustomerResource {
       required final String firstName,
       required final String lastName,
       required final String from,
-      final ManagedUserVm? systemUser}) = _$CustomerResourceImpl;
+      final ManagedUserVm? systemUser,
+      final List<Rental>? rentals,
+      final Location? location}) = _$CustomerResourceImpl;
 
   factory _CustomerResource.fromJson(Map<String, dynamic> json) =
       _$CustomerResourceImpl.fromJson;
@@ -282,6 +353,10 @@ abstract class _CustomerResource implements CustomerResource {
   String get from;
   @override
   ManagedUserVm? get systemUser;
+  @override
+  List<Rental>? get rentals;
+  @override
+  Location? get location;
 
   /// Create a copy of CustomerResource
   /// with the given fields replaced by the non-null parameter values.

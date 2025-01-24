@@ -1,4 +1,6 @@
+import 'package:automaat_app/data/services/api/model/location/location.dart';
 import 'package:automaat_app/data/services/api/model/managed_user_vm/managed_user_vm.dart';
+import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part "customer_resource.freezed.dart";
@@ -14,6 +16,8 @@ class CustomerResource with _$CustomerResource {
     required String lastName,
     required String from,
     ManagedUserVm? systemUser,
+    List<Rental>? rentals,
+    Location? location,
   }) = _CustomerResource;
 
   factory CustomerResource.fromJson(Map<String, Object?> json) =>

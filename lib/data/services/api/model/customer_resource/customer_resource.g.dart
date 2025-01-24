@@ -17,6 +17,12 @@ _$CustomerResourceImpl _$$CustomerResourceImplFromJson(
       systemUser: json['systemUser'] == null
           ? null
           : ManagedUserVm.fromJson(json['systemUser'] as Map<String, dynamic>),
+      rentals: (json['rentals'] as List<dynamic>?)
+          ?.map((e) => Rental.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      location: json['location'] == null
+          ? null
+          : Location.fromJson(json['location'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CustomerResourceImplToJson(
@@ -28,4 +34,6 @@ Map<String, dynamic> _$$CustomerResourceImplToJson(
       'lastName': instance.lastName,
       'from': instance.from,
       'systemUser': instance.systemUser,
+      'rentals': instance.rentals,
+      'location': instance.location,
     };
