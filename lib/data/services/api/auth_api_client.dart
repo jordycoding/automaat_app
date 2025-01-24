@@ -25,4 +25,15 @@ class AuthApiClient with HttpDelegate {
     return postRequest(Uri.parse("${AppConstants.serverUrl}/authenticate"),
         _clientFactory, loginRequest, LoginResponse.fromJson);
   }
+
+  Future<Result<void>> resetPassword(String email) async {
+    return postRequest(
+      Uri.parse("${AppConstants.serverUrl}/account/reset-password/init"),
+      _clientFactory,
+      email,
+      null,
+      null,
+      RequestType.plain,
+    );
+  }
 }

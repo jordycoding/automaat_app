@@ -117,5 +117,14 @@ class AuthRepositoryRemote extends AuthRepository {
     }
   }
 
+  @override
+  Future<Result<void>> resetPassword({required String email}) async {
+    try {
+      return _authApiClient.resetPassword(email);
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+  }
+
   String? _authHeaderProvider() => _idToken != null ? "Bearer $_idToken" : null;
 }
