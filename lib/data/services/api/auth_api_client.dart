@@ -18,7 +18,7 @@ class AuthApiClient with HttpDelegate {
 
   Future<Result<void>> register(RegisterRequest registerRequest) async {
     return postRequest(Uri.parse("${AppConstants.serverUrl}/AM/register"),
-        _clientFactory, registerRequest);
+        _clientFactory, registerRequest, null, _log);
   }
 
   Future<Result<LoginResponse>> login(LoginRequest loginRequest) async {
