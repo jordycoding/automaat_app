@@ -23,8 +23,9 @@ Future<String?> displayInputDialog(BuildContext context,
           TextButton(
             child: Text("Ok"),
             onPressed: () {
+              final text = _textFieldController.value.text;
               _textFieldController.clear();
-              Navigator.pop(context, _textFieldController.value.text);
+              Navigator.pop(context, text);
             },
           )
         ],
