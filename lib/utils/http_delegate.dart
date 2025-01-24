@@ -7,15 +7,15 @@ import 'package:logging/logging.dart';
 enum RequestType { json, plain }
 
 mixin HttpDelegate {
-  Future<Result<T?>> getRequest<T>(Uri uri, HttpClient Function() clientFactory,
+  Future<Result<T>> getRequest<T>(Uri uri, HttpClient Function() clientFactory,
       [T Function(Map<String, Object?>)? fromJson]) async {
     final client = clientFactory();
     try {
       final request = await client.getUrl(uri);
       final response = await request.close();
       if (response.statusCode >= 200 && response.statusCode <= 300) {
-        if (T == dynamic) {
-          return Result.ok(null);
+        if (fromJson == null) {
+          return Result.ok(null as T);
         } else {
           final stringData = await response.transform(utf8.decoder).join();
           if (fromJson == null) {
@@ -35,17 +35,19 @@ mixin HttpDelegate {
 
   Future<Result<T>> postRequest<T>(
       Uri uri, HttpClient Function() clientFactory, Object body,
-      [T Function(Map<String, Object?>)? fromJson, Logger? log, RequestType type = RequestType.json]) async {
+      [T Function(Map<String, Object?>)? fromJson,
+      Logger? log,
+      RequestType type = RequestType.json]) async {
     final client = clientFactory();
     try {
       final request = await client.postUrl(uri);
-            if (type == RequestType.json) {
-      request.headers.contentType = ContentType.json;
-      request.write(jsonEncode(body));
-            } else if (type == RequestType.plain) {
-request.headers.contentType = ContentType.text;
-request.write(body);
-            }
+      if (type == RequestType.json) {
+        request.headers.contentType = ContentType.json;
+        request.write(jsonEncode(body));
+      } else if (type == RequestType.plain) {
+        request.headers.contentType = ContentType.text;
+        request.write(body);
+      }
       final response = await request.close();
       if (response.statusCode >= 200 && response.statusCode <= 300) {
         if (fromJson == null) {
