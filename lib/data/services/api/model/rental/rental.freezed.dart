@@ -26,7 +26,7 @@ mixin _$Rental {
   double get latitude => throw _privateConstructorUsedError;
   String get fromDate => throw _privateConstructorUsedError;
   String get toDate => throw _privateConstructorUsedError;
-  String get state => throw _privateConstructorUsedError;
+  State? get state => throw _privateConstructorUsedError;
   List<Inspection>? get inspections => throw _privateConstructorUsedError;
   CustomerResource? get customer => throw _privateConstructorUsedError;
   Car get car => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $RentalCopyWith<$Res> {
       double latitude,
       String fromDate,
       String toDate,
-      String state,
+      State? state,
       List<Inspection>? inspections,
       CustomerResource? customer,
       Car car});
@@ -82,7 +82,7 @@ class _$RentalCopyWithImpl<$Res, $Val extends Rental>
     Object? latitude = null,
     Object? fromDate = null,
     Object? toDate = null,
-    Object? state = null,
+    Object? state = freezed,
     Object? inspections = freezed,
     Object? customer = freezed,
     Object? car = null,
@@ -112,10 +112,10 @@ class _$RentalCopyWithImpl<$Res, $Val extends Rental>
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
               as String,
-      state: null == state
+      state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as String,
+              as State?,
       inspections: freezed == inspections
           ? _value.inspections
           : inspections // ignore: cast_nullable_to_non_nullable
@@ -170,7 +170,7 @@ abstract class _$$RentalImplCopyWith<$Res> implements $RentalCopyWith<$Res> {
       double latitude,
       String fromDate,
       String toDate,
-      String state,
+      State? state,
       List<Inspection>? inspections,
       CustomerResource? customer,
       Car car});
@@ -200,7 +200,7 @@ class __$$RentalImplCopyWithImpl<$Res>
     Object? latitude = null,
     Object? fromDate = null,
     Object? toDate = null,
-    Object? state = null,
+    Object? state = freezed,
     Object? inspections = freezed,
     Object? customer = freezed,
     Object? car = null,
@@ -230,10 +230,10 @@ class __$$RentalImplCopyWithImpl<$Res>
           ? _value.toDate
           : toDate // ignore: cast_nullable_to_non_nullable
               as String,
-      state: null == state
+      state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as String,
+              as State?,
       inspections: freezed == inspections
           ? _value._inspections
           : inspections // ignore: cast_nullable_to_non_nullable
@@ -260,7 +260,7 @@ class _$RentalImpl implements _Rental {
       required this.latitude,
       required this.fromDate,
       required this.toDate,
-      required this.state,
+      this.state,
       final List<Inspection>? inspections,
       this.customer,
       required this.car})
@@ -282,7 +282,7 @@ class _$RentalImpl implements _Rental {
   @override
   final String toDate;
   @override
-  final String state;
+  final State? state;
   final List<Inspection>? _inspections;
   @override
   List<Inspection>? get inspections {
@@ -364,7 +364,7 @@ abstract class _Rental implements Rental {
       required final double latitude,
       required final String fromDate,
       required final String toDate,
-      required final String state,
+      final State? state,
       final List<Inspection>? inspections,
       final CustomerResource? customer,
       required final Car car}) = _$RentalImpl;
@@ -384,7 +384,7 @@ abstract class _Rental implements Rental {
   @override
   String get toDate;
   @override
-  String get state;
+  State? get state;
   @override
   List<Inspection>? get inspections;
   @override

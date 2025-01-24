@@ -16,11 +16,22 @@ class Rental with _$Rental {
     required double latitude,
     required String fromDate,
     required String toDate,
-    required String state,
+    State? state,
     List<Inspection>? inspections,
     CustomerResource? customer,
     required Car car,
   }) = _Rental;
 
   factory Rental.fromJson(Map<String, Object?> json) => _$RentalFromJson(json);
+}
+
+enum State {
+  @JsonValue("ACTIVE")
+  active,
+  @JsonValue("RESERVED")
+  reserved,
+  @JsonValue("PICKUP")
+  pickup,
+  @JsonValue("RETURNED")
+  returned
 }
