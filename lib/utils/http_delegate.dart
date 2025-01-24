@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:automaat_app/utils/result.dart';
 import 'package:logging/logging.dart';
 
+enum RequestType { json, plain }
+
 mixin HttpDelegate {
   Future<Result<T?>> getRequest<T>(Uri uri, HttpClient Function() clientFactory,
       [T Function(Map<String, Object?>)? fromJson]) async {
@@ -33,12 +35,17 @@ mixin HttpDelegate {
 
   Future<Result<T>> postRequest<T>(
       Uri uri, HttpClient Function() clientFactory, Object body,
-      [T Function(Map<String, Object?>)? fromJson, Logger? log]) async {
+      [T Function(Map<String, Object?>)? fromJson, Logger? log, RequestType type = RequestType.json]) async {
     final client = clientFactory();
     try {
       final request = await client.postUrl(uri);
+            if (type == RequestType.json) {
       request.headers.contentType = ContentType.json;
       request.write(jsonEncode(body));
+            } else if (type == RequestType.plain) {
+request.headers.contentType = ContentType.text;
+request.write(body);
+            }
       final response = await request.close();
       if (response.statusCode >= 200 && response.statusCode <= 300) {
         if (fromJson == null) {

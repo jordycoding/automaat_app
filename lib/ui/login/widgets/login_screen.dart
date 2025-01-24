@@ -1,4 +1,5 @@
 import 'package:automaat_app/routing/app_routes.dart';
+import 'package:automaat_app/ui/core/ui/input_dialog.dart';
 import 'package:automaat_app/ui/login/view_models/login_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -21,18 +22,22 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     super.initState();
     widget.viewModel.login.addListener(_onResult);
+    widget.viewModel.resetPassword.addListener(_onResult);
   }
 
   @override
   void didUpdateWidget(covariant LoginScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     oldWidget.viewModel.login.removeListener(_onResult);
+    oldWidget.viewModel.resetPassword.removeListener(_onResult);
     widget.viewModel.login.addListener(_onResult);
+    widget.viewModel.resetPassword.addListener(_onResult);
   }
 
   @override
   void dispose() {
     widget.viewModel.login.removeListener(_onResult);
+    widget.viewModel.resetPassword.removeListener(_onResult);
     super.dispose();
   }
 
@@ -104,6 +109,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text("Register"),
                   )
                 ],
+              ),
+              const SizedBox(height: 5),
+              Center(
+                child: FilledButton(
+                    onPressed: () async {
+                      final result = await displayInputDialog(
+                        context,
+                        "Reset password",
+                        "Enter your email",
+                      );
+                      if (result != null) {
+                        widget.viewModel.resetPassword.execute(result);
+                      }
+                    },
+                    child: const Text("Forgot password"),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.red)),
               )
             ],
           ),
@@ -121,7 +143,23 @@ class _LoginScreenState extends State<LoginScreen> {
     if (widget.viewModel.login.error) {
       widget.viewModel.login.clearResult();
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("There was an error logging in")));
+          const SnackBar(content: Text("There was an error logging in")));
+    }
+    if (widget.viewModel.resetPassword.completed) {
+      widget.viewModel.resetPassword.clearResult();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("An email for resetting your passsword has been sent"),
+        ),
+      );
+    }
+    if (widget.viewModel.resetPassword.error) {
+      widget.viewModel.resetPassword.clearResult();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("There was an error resetting your password"),
+        ),
+      );
     }
   }
 }
