@@ -20,6 +20,8 @@ final _shellNavigatorHomeKey =
     GlobalKey<NavigatorState>(debugLabel: "shellHome");
 final _shellNavigatoProfileKey =
     GlobalKey<NavigatorState>(debugLabel: "shellProfile");
+final _shellNavigatorCarsKey = 
+    GlobalKey<NavigatorState>(debugLabel: "shellCars");
 
 GoRouter router(AuthRepository authRepository) => GoRouter(
       initialLocation: AppRoutes.login,
@@ -77,17 +79,21 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                 )
               ],
             ),
+                        StatefulShellBranch(
+              navigatorKey: _shellNavigatorCarsKey,
+              routes: [
+                GoRoute(
+                  path: AppRoutes.carList,
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    child: ChangeNotifierProvider(
+                      create: (_) => CarListViewModel(context.read<CarRepository>())..loadCars(),
+                      child: const CarListScreen(),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ],
-        ),
-        GoRoute(
-          path: AppRoutes.carList,
-          builder: (context, state) => ChangeNotifierProvider(
-            create: (_) => CarListViewModel(
-              // Haal de repository direct uit de widget tree
-              context.read<CarRepository>(),
-            )..loadCars(),
-            child: const CarListScreen(),
-          ),
         ),
       ],
     );
