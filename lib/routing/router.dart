@@ -4,6 +4,7 @@ import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/car_list/view_model/car_list_viewmodel.dart';
 import 'package:automaat_app/ui/car_list/widgets/car_list_screen.dart';
 import 'package:automaat_app/ui/core/profile/view_models/profile_viewmodel.dart';
+import 'package:automaat_app/ui/core/profile/widgets/past_rentals_screen.dart';
 import 'package:automaat_app/ui/core/profile/widgets/profile_screen.dart';
 import 'package:automaat_app/ui/core/ui/scaffold_nested_navigation.dart';
 import 'package:automaat_app/ui/home/widgets/home_screen.dart';
@@ -76,6 +77,12 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                       ),
                     ),
                   ),
+                  routes: [
+                    GoRoute(
+                      path: "pastRentals",
+                      builder: (context, state) => PastRentalsScreen(),
+                    )
+                  ],
                 )
               ],
             ),
