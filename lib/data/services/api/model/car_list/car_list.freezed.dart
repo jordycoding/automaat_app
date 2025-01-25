@@ -155,16 +155,17 @@ mixin _$Car {
   String get brand => throw _privateConstructorUsedError;
   String get model => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
-  String get fuel => throw _privateConstructorUsedError;
-  double get price => throw _privateConstructorUsedError;
   String get pictureContentType => throw _privateConstructorUsedError;
+  String get fuel => throw _privateConstructorUsedError;
   String get options => throw _privateConstructorUsedError;
   String get licensePlate => throw _privateConstructorUsedError;
   int get engineSize => throw _privateConstructorUsedError;
   int get modelYear => throw _privateConstructorUsedError;
   DateTime get since => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
   int get nrOfSeats => throw _privateConstructorUsedError;
   String get body => throw _privateConstructorUsedError;
+  double get longitude => throw _privateConstructorUsedError;
   double get latitude => throw _privateConstructorUsedError;
 
   /// Serializes this Car to a JSON map.
@@ -186,16 +187,17 @@ abstract class $CarCopyWith<$Res> {
       String brand,
       String model,
       String picture,
-      String fuel,
-      double price,
       String pictureContentType,
+      String fuel,
       String options,
       String licensePlate,
       int engineSize,
       int modelYear,
       DateTime since,
+      double price,
       int nrOfSeats,
       String body,
+      double longitude,
       double latitude});
 }
 
@@ -217,16 +219,17 @@ class _$CarCopyWithImpl<$Res, $Val extends Car> implements $CarCopyWith<$Res> {
     Object? brand = null,
     Object? model = null,
     Object? picture = null,
-    Object? fuel = null,
-    Object? price = null,
     Object? pictureContentType = null,
+    Object? fuel = null,
     Object? options = null,
     Object? licensePlate = null,
     Object? engineSize = null,
     Object? modelYear = null,
     Object? since = null,
+    Object? price = null,
     Object? nrOfSeats = null,
     Object? body = null,
+    Object? longitude = null,
     Object? latitude = null,
   }) {
     return _then(_value.copyWith(
@@ -246,17 +249,13 @@ class _$CarCopyWithImpl<$Res, $Val extends Car> implements $CarCopyWith<$Res> {
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
-      fuel: null == fuel
-          ? _value.fuel
-          : fuel // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
       pictureContentType: null == pictureContentType
           ? _value.pictureContentType
           : pictureContentType // ignore: cast_nullable_to_non_nullable
+              as String,
+      fuel: null == fuel
+          ? _value.fuel
+          : fuel // ignore: cast_nullable_to_non_nullable
               as String,
       options: null == options
           ? _value.options
@@ -278,6 +277,10 @@ class _$CarCopyWithImpl<$Res, $Val extends Car> implements $CarCopyWith<$Res> {
           ? _value.since
           : since // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
       nrOfSeats: null == nrOfSeats
           ? _value.nrOfSeats
           : nrOfSeats // ignore: cast_nullable_to_non_nullable
@@ -286,6 +289,10 @@ class _$CarCopyWithImpl<$Res, $Val extends Car> implements $CarCopyWith<$Res> {
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
       latitude: null == latitude
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
@@ -305,16 +312,17 @@ abstract class _$$CarImplCopyWith<$Res> implements $CarCopyWith<$Res> {
       String brand,
       String model,
       String picture,
-      String fuel,
-      double price,
       String pictureContentType,
+      String fuel,
       String options,
       String licensePlate,
       int engineSize,
       int modelYear,
       DateTime since,
+      double price,
       int nrOfSeats,
       String body,
+      double longitude,
       double latitude});
 }
 
@@ -333,16 +341,17 @@ class __$$CarImplCopyWithImpl<$Res> extends _$CarCopyWithImpl<$Res, _$CarImpl>
     Object? brand = null,
     Object? model = null,
     Object? picture = null,
-    Object? fuel = null,
-    Object? price = null,
     Object? pictureContentType = null,
+    Object? fuel = null,
     Object? options = null,
     Object? licensePlate = null,
     Object? engineSize = null,
     Object? modelYear = null,
     Object? since = null,
+    Object? price = null,
     Object? nrOfSeats = null,
     Object? body = null,
+    Object? longitude = null,
     Object? latitude = null,
   }) {
     return _then(_$CarImpl(
@@ -362,17 +371,13 @@ class __$$CarImplCopyWithImpl<$Res> extends _$CarCopyWithImpl<$Res, _$CarImpl>
           ? _value.picture
           : picture // ignore: cast_nullable_to_non_nullable
               as String,
-      fuel: null == fuel
-          ? _value.fuel
-          : fuel // ignore: cast_nullable_to_non_nullable
-              as String,
-      price: null == price
-          ? _value.price
-          : price // ignore: cast_nullable_to_non_nullable
-              as double,
       pictureContentType: null == pictureContentType
           ? _value.pictureContentType
           : pictureContentType // ignore: cast_nullable_to_non_nullable
+              as String,
+      fuel: null == fuel
+          ? _value.fuel
+          : fuel // ignore: cast_nullable_to_non_nullable
               as String,
       options: null == options
           ? _value.options
@@ -394,6 +399,10 @@ class __$$CarImplCopyWithImpl<$Res> extends _$CarCopyWithImpl<$Res, _$CarImpl>
           ? _value.since
           : since // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double,
       nrOfSeats: null == nrOfSeats
           ? _value.nrOfSeats
           : nrOfSeats // ignore: cast_nullable_to_non_nullable
@@ -402,6 +411,10 @@ class __$$CarImplCopyWithImpl<$Res> extends _$CarCopyWithImpl<$Res, _$CarImpl>
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
               as String,
+      longitude: null == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double,
       latitude: null == latitude
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
@@ -418,16 +431,17 @@ class _$CarImpl implements _Car {
       required this.brand,
       required this.model,
       required this.picture,
-      required this.fuel,
-      required this.price,
       required this.pictureContentType,
+      required this.fuel,
       required this.options,
       required this.licensePlate,
       required this.engineSize,
       required this.modelYear,
       required this.since,
+      required this.price,
       required this.nrOfSeats,
       required this.body,
+      required this.longitude,
       required this.latitude});
 
   factory _$CarImpl.fromJson(Map<String, dynamic> json) =>
@@ -442,11 +456,9 @@ class _$CarImpl implements _Car {
   @override
   final String picture;
   @override
-  final String fuel;
-  @override
-  final double price;
-  @override
   final String pictureContentType;
+  @override
+  final String fuel;
   @override
   final String options;
   @override
@@ -458,15 +470,19 @@ class _$CarImpl implements _Car {
   @override
   final DateTime since;
   @override
+  final double price;
+  @override
   final int nrOfSeats;
   @override
   final String body;
+  @override
+  final double longitude;
   @override
   final double latitude;
 
   @override
   String toString() {
-    return 'Car(id: $id, brand: $brand, model: $model, picture: $picture, fuel: $fuel, price: $price, pictureContentType: $pictureContentType, options: $options, licensePlate: $licensePlate, engineSize: $engineSize, modelYear: $modelYear, since: $since, nrOfSeats: $nrOfSeats, body: $body, latitude: $latitude)';
+    return 'Car(id: $id, brand: $brand, model: $model, picture: $picture, pictureContentType: $pictureContentType, fuel: $fuel, options: $options, licensePlate: $licensePlate, engineSize: $engineSize, modelYear: $modelYear, since: $since, price: $price, nrOfSeats: $nrOfSeats, body: $body, longitude: $longitude, latitude: $latitude)';
   }
 
   @override
@@ -478,10 +494,9 @@ class _$CarImpl implements _Car {
             (identical(other.brand, brand) || other.brand == brand) &&
             (identical(other.model, model) || other.model == model) &&
             (identical(other.picture, picture) || other.picture == picture) &&
-            (identical(other.fuel, fuel) || other.fuel == fuel) &&
-            (identical(other.price, price) || other.price == price) &&
             (identical(other.pictureContentType, pictureContentType) ||
                 other.pictureContentType == pictureContentType) &&
+            (identical(other.fuel, fuel) || other.fuel == fuel) &&
             (identical(other.options, options) || other.options == options) &&
             (identical(other.licensePlate, licensePlate) ||
                 other.licensePlate == licensePlate) &&
@@ -490,9 +505,12 @@ class _$CarImpl implements _Car {
             (identical(other.modelYear, modelYear) ||
                 other.modelYear == modelYear) &&
             (identical(other.since, since) || other.since == since) &&
+            (identical(other.price, price) || other.price == price) &&
             (identical(other.nrOfSeats, nrOfSeats) ||
                 other.nrOfSeats == nrOfSeats) &&
             (identical(other.body, body) || other.body == body) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
             (identical(other.latitude, latitude) ||
                 other.latitude == latitude));
   }
@@ -505,16 +523,17 @@ class _$CarImpl implements _Car {
       brand,
       model,
       picture,
-      fuel,
-      price,
       pictureContentType,
+      fuel,
       options,
       licensePlate,
       engineSize,
       modelYear,
       since,
+      price,
       nrOfSeats,
       body,
+      longitude,
       latitude);
 
   /// Create a copy of Car
@@ -539,16 +558,17 @@ abstract class _Car implements Car {
       required final String brand,
       required final String model,
       required final String picture,
-      required final String fuel,
-      required final double price,
       required final String pictureContentType,
+      required final String fuel,
       required final String options,
       required final String licensePlate,
       required final int engineSize,
       required final int modelYear,
       required final DateTime since,
+      required final double price,
       required final int nrOfSeats,
       required final String body,
+      required final double longitude,
       required final double latitude}) = _$CarImpl;
 
   factory _Car.fromJson(Map<String, dynamic> json) = _$CarImpl.fromJson;
@@ -562,11 +582,9 @@ abstract class _Car implements Car {
   @override
   String get picture;
   @override
-  String get fuel;
-  @override
-  double get price;
-  @override
   String get pictureContentType;
+  @override
+  String get fuel;
   @override
   String get options;
   @override
@@ -578,9 +596,13 @@ abstract class _Car implements Car {
   @override
   DateTime get since;
   @override
+  double get price;
+  @override
   int get nrOfSeats;
   @override
   String get body;
+  @override
+  double get longitude;
   @override
   double get latitude;
 

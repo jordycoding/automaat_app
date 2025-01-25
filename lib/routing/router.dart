@@ -86,18 +86,20 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                 )
               ],
             ),
-                        StatefulShellBranch(
+            StatefulShellBranch(
               navigatorKey: _shellNavigatorCarsKey,
               routes: [
                 GoRoute(
                   path: AppRoutes.carList,
                   pageBuilder: (context, state) => NoTransitionPage(
                     child: ChangeNotifierProvider(
-                      create: (_) => CarListViewModel(context.read<CarRepository>())..loadCars(),
+                      create: (context) => CarListViewModel(
+                        repository: context.read<CarRepository>(),
+                      )..loadCars(),
                       child: const CarListScreen(),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ],
