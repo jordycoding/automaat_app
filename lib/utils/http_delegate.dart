@@ -7,9 +7,13 @@ import 'package:logging/logging.dart';
 enum RequestType { json, plain }
 
 mixin HttpDelegate {
-  Future<Result<T>> getRequest<T>(Uri uri, HttpClient Function() clientFactory,
-      [T Function(Map<String, Object?>)? fromJson,
-      Future<void> Function(HttpHeaders)? addHeaders]) async {
+  Future<Result<T>> getRequest<T>(
+    Uri uri,
+    HttpClient Function() clientFactory, [
+    T Function(Map<String, Object?>)? fromJson,
+    Future<void> Function(HttpHeaders)? addHeaders,
+    bool returnRaw = false,
+  ]) async {
     final client = clientFactory();
     try {
       final request = await client.getUrl(uri);
@@ -18,14 +22,19 @@ mixin HttpDelegate {
       }
       final response = await request.close();
       if (response.statusCode >= 200 && response.statusCode <= 300) {
-        if (fromJson == null) {
+        if (fromJson == null && !returnRaw) {
           return Result.ok(null as T);
-        } else {
+        } else if (returnRaw) {
           final stringData = await response.transform(utf8.decoder).join();
-          if (fromJson == null) {
-            throw Exception("Please provide fromjson for parsing");
-          }
+          return Result.ok(stringData as T);
+        } else if (fromJson != null) {
+          final stringData = await response.transform(utf8.decoder).join();
           return Result.ok(fromJson(jsonDecode(stringData)));
+        } else {
+          return Result.error(
+            Exception(
+                "Please provide a fromsjon function, or set returnRaw to true"),
+          );
         }
       } else {
         return Result.error(Exception("Error fetching $uri"));

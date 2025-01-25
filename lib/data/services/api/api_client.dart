@@ -31,4 +31,14 @@ class ApiClient with HttpDelegate {
     return getRequest(Uri.parse("${AppConstants.serverUrl}/AM/me"),
         _clientFactory, CustomerResource.fromJson, _authHeader);
   }
+
+  Future<Result<String>> checkAuth() {
+    return getRequest<String>(
+      Uri.parse("${AppConstants.serverUrl}/authenticate"),
+      _clientFactory,
+      null,
+      _authHeader,
+      true,
+    );
+  }
 }

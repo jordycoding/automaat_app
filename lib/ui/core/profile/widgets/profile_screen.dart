@@ -58,20 +58,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
           if (profile != null) {
             return Padding(
               padding: const EdgeInsets.all(16.0),
-              child: ProfileOverview(profile: profile),
+              child: Column(
+                children: <Widget>[
+                  ProfileOverview(profile: profile),
+                  const SizedBox(height: 10),
+                  LogoutButton(logout: widget.viewModel.logout.execute)
+                ],
+              ),
             );
           }
-          return child!;
-        },
-        child: const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Row(
+          return Column(
             children: <Widget>[
-              Text("Hey bitch"),
-              Text("No profile info available")
+              Text("No profile info available"),
+              const SizedBox(height: 10),
+              LogoutButton(logout: widget.viewModel.logout.execute)
             ],
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -88,5 +91,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       );
     }
+  }
+}
+
+class LogoutButton extends StatelessWidget {
+  final Function logout;
+
+  const LogoutButton({required this.logout});
+
+  @override
+  Widget build(BuildContext context) {
+    return FilledButton(
+      onPressed: () {
+        logout();
+      },
+      style: FilledButton.styleFrom(backgroundColor: Colors.red),
+      child: const Text("Logout"),
+    );
   }
 }

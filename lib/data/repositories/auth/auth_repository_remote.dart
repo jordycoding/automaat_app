@@ -1,6 +1,7 @@
 import 'package:automaat_app/data/repositories/auth/auth_repository.dart';
 import 'package:automaat_app/data/services/api/api_client.dart';
 import 'package:automaat_app/data/services/api/auth_api_client.dart';
+import 'package:automaat_app/data/services/api/model/customer_resource/customer_resource.dart';
 import 'package:automaat_app/data/services/api/model/login_request/login_request.dart';
 import 'package:automaat_app/data/services/api/model/login_response/login_response.dart';
 import 'package:automaat_app/data/services/api/model/register_request/register_request.dart';
@@ -128,4 +129,9 @@ class AuthRepositoryRemote extends AuthRepository {
   }
 
   String? _authHeaderProvider() => _idToken != null ? "Bearer $_idToken" : null;
+
+  @override
+  Future<Result<String>> checkAuth() async {
+    return await _apiClient.checkAuth();
+  }
 }

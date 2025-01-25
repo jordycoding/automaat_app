@@ -53,7 +53,7 @@ class ProfileOverview extends StatelessWidget {
               child: const Text("View all rentals"),
             )
           ]
-        ]
+        ],
       ],
     );
   }

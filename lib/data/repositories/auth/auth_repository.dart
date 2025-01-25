@@ -18,4 +18,6 @@ abstract class AuthRepository extends ChangeNotifier {
   });
 
   Future<Result<void>> resetPassword({required String email});
+
+  Future<Result<String>> checkAuth();
 }

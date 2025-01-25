@@ -70,6 +70,7 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                     child: ProfileScreen(
                       viewModel: ProfileViewModel(
                         profileRepository: context.read(),
+                        authRepository: context.read(),
                       ),
                     ),
                   ),
