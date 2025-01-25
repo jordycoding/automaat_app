@@ -155,3 +155,11 @@ app.*.symbols
 .vscode/
 pubspec.lock
 automaat_app.iml
+
+pubspec.yaml
+
+lib/config/constants.dart
+
+android/
+
+.metadata
