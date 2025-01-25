@@ -1,9 +1,9 @@
-import 'package:automaat_app/config/dependencies.dart';
 import 'package:automaat_app/data/repositories/auth/auth_repository.dart';
 import 'package:automaat_app/data/repositories/car_list/car_repository.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/car_list/view_model/car_list_viewmodel.dart';
 import 'package:automaat_app/ui/car_list/widgets/car_list_screen.dart';
+import 'package:automaat_app/ui/core/ui/scaffold_nested_navigation.dart';
 import 'package:automaat_app/ui/home/widgets/home_screen.dart';
 import 'package:automaat_app/ui/login/view_models/login_viewmodel.dart';
 import 'package:automaat_app/ui/login/widgets/login_screen.dart';
@@ -13,8 +13,15 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorHomeKey =
+    GlobalKey<NavigatorState>(debugLabel: "shellHome");
+final _shellNavigatoProfileKey =
+    GlobalKey<NavigatorState>(debugLabel: "shellProfile");
+
 GoRouter router(AuthRepository authRepository) => GoRouter(
       initialLocation: AppRoutes.login,
+      navigatorKey: _rootNavigatorKey,
       debugLogDiagnostics: true,
       redirect: _redirect,
       refreshListenable: authRepository,
@@ -35,6 +42,32 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
             ),
           ),
         ),
+        StatefulShellRoute.indexedStack(
+          builder: (context, state, navigationShell) {
+            return ScaffoldWithNestedNavigation(
+                navigationShell: navigationShell);
+          },
+          branches: [
+            StatefulShellBranch(
+              navigatorKey: _shellNavigatorHomeKey,
+              routes: [
+                GoRoute(
+                  path: AppRoutes.home,
+                  pageBuilder: (context, state) => const NoTransitionPage(
+                    child: HomeScreen(),
+                  ),
+                )
+              ],
+            ),
+//             StatefulShellBranch(
+//               navigatorKey: _shellNavigatoProfileKey,
+//               routes: [
+// GoRoute(path: AppRoutes.profile,
+//                         pageBuilder: (context, state) => const NoTransitionPage(child: Profil))
+//                     ],
+//             ),
+          ],
+        ),
         GoRoute(
           path: AppRoutes.carList,
           builder: (context, state) => ChangeNotifierProvider(
@@ -45,10 +78,6 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
             child: const CarListScreen(),
           ),
         ),
-        GoRoute(
-          path: AppRoutes.home,
-          builder: (context, state) => const HomeScreen(),
-        )
       ],
     );
 

@@ -17,6 +17,6 @@ class Inspection with _$Inspection {
     String? completed,
   }) = _Inspection;
 
-  factory Inpsection.fromJson(Map<String, Object?> json) =>
+  factory Inspection.fromJson(Map<String, Object?> json) =>
       _$InspectionFromJson(json);
 }
