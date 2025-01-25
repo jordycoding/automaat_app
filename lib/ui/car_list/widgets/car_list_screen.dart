@@ -35,8 +35,34 @@ class _CarListScreenState extends State<CarListScreen> {
       ),
       body: Consumer<CarListViewModel>(
         builder: (context, viewModel, _) {
-          // ... bestaande state checks
+          // Toon laadindicator
+          if (viewModel.isLoading && viewModel.cars.isEmpty) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
+          // Toon foutmelding
+          if (viewModel.error != null) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Fout: ${viewModel.error!.toString()}'),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () => viewModel.loadCars(forceRefresh: true),
+                    child: const Text('Probeer opnieuw'),
+                  ),
+                ],
+              ),
+            );
+          }
+
+          // Toon lege staat
+          if (viewModel.cars.isEmpty) {
+            return const Center(child: Text('Geen auto\'s beschikbaar'));
+          }
+
+          // Toon de lijst
           return RefreshIndicator(
             onRefresh: () => viewModel.loadCars(forceRefresh: true),
             child: ListView.separated(
@@ -112,6 +138,7 @@ class _CarListScreenState extends State<CarListScreen> {
           ? ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
+                // Corrigeer de URL-indeling
                 Uri.parse('${AppConstants.serverUrl}/${car.picture}').toString(),
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) => 
