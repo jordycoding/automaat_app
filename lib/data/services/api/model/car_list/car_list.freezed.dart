@@ -14,6 +14,137 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+/// @nodoc
+mixin _$CarList {
+  List<Car> get data => throw _privateConstructorUsedError;
+
+  /// Create a copy of CarList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $CarListCopyWith<CarList> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CarListCopyWith<$Res> {
+  factory $CarListCopyWith(CarList value, $Res Function(CarList) then) =
+      _$CarListCopyWithImpl<$Res, CarList>;
+  @useResult
+  $Res call({List<Car> data});
+}
+
+/// @nodoc
+class _$CarListCopyWithImpl<$Res, $Val extends CarList>
+    implements $CarListCopyWith<$Res> {
+  _$CarListCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of CarList
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Car>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CarListImplCopyWith<$Res> implements $CarListCopyWith<$Res> {
+  factory _$$CarListImplCopyWith(
+          _$CarListImpl value, $Res Function(_$CarListImpl) then) =
+      __$$CarListImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<Car> data});
+}
+
+/// @nodoc
+class __$$CarListImplCopyWithImpl<$Res>
+    extends _$CarListCopyWithImpl<$Res, _$CarListImpl>
+    implements _$$CarListImplCopyWith<$Res> {
+  __$$CarListImplCopyWithImpl(
+      _$CarListImpl _value, $Res Function(_$CarListImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of CarList
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$CarListImpl(
+      null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<Car>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$CarListImpl implements _CarList {
+  _$CarListImpl(final List<Car> data) : _data = data;
+
+  final List<Car> _data;
+  @override
+  List<Car> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  String toString() {
+    return 'CarList(data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CarListImpl &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  /// Create a copy of CarList
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CarListImplCopyWith<_$CarListImpl> get copyWith =>
+      __$$CarListImplCopyWithImpl<_$CarListImpl>(this, _$identity);
+}
+
+abstract class _CarList implements CarList {
+  factory _CarList(final List<Car> data) = _$CarListImpl;
+
+  @override
+  List<Car> get data;
+
+  /// Create a copy of CarList
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$CarListImplCopyWith<_$CarListImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 Car _$CarFromJson(Map<String, dynamic> json) {
   return _Car.fromJson(json);
 }
@@ -26,6 +157,15 @@ mixin _$Car {
   String get picture => throw _privateConstructorUsedError;
   String get fuel => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
+  String get pictureContentType => throw _privateConstructorUsedError;
+  String get options => throw _privateConstructorUsedError;
+  String get licensePlate => throw _privateConstructorUsedError;
+  int get engineSize => throw _privateConstructorUsedError;
+  int get modelYear => throw _privateConstructorUsedError;
+  DateTime get since => throw _privateConstructorUsedError;
+  int get nrOfSeats => throw _privateConstructorUsedError;
+  String get body => throw _privateConstructorUsedError;
+  double get latitude => throw _privateConstructorUsedError;
 
   /// Serializes this Car to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +187,16 @@ abstract class $CarCopyWith<$Res> {
       String model,
       String picture,
       String fuel,
-      double price});
+      double price,
+      String pictureContentType,
+      String options,
+      String licensePlate,
+      int engineSize,
+      int modelYear,
+      DateTime since,
+      int nrOfSeats,
+      String body,
+      double latitude});
 }
 
 /// @nodoc
@@ -70,6 +219,15 @@ class _$CarCopyWithImpl<$Res, $Val extends Car> implements $CarCopyWith<$Res> {
     Object? picture = null,
     Object? fuel = null,
     Object? price = null,
+    Object? pictureContentType = null,
+    Object? options = null,
+    Object? licensePlate = null,
+    Object? engineSize = null,
+    Object? modelYear = null,
+    Object? since = null,
+    Object? nrOfSeats = null,
+    Object? body = null,
+    Object? latitude = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -96,6 +254,42 @@ class _$CarCopyWithImpl<$Res, $Val extends Car> implements $CarCopyWith<$Res> {
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      pictureContentType: null == pictureContentType
+          ? _value.pictureContentType
+          : pictureContentType // ignore: cast_nullable_to_non_nullable
+              as String,
+      options: null == options
+          ? _value.options
+          : options // ignore: cast_nullable_to_non_nullable
+              as String,
+      licensePlate: null == licensePlate
+          ? _value.licensePlate
+          : licensePlate // ignore: cast_nullable_to_non_nullable
+              as String,
+      engineSize: null == engineSize
+          ? _value.engineSize
+          : engineSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      modelYear: null == modelYear
+          ? _value.modelYear
+          : modelYear // ignore: cast_nullable_to_non_nullable
+              as int,
+      since: null == since
+          ? _value.since
+          : since // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      nrOfSeats: null == nrOfSeats
+          ? _value.nrOfSeats
+          : nrOfSeats // ignore: cast_nullable_to_non_nullable
+              as int,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -112,7 +306,16 @@ abstract class _$$CarImplCopyWith<$Res> implements $CarCopyWith<$Res> {
       String model,
       String picture,
       String fuel,
-      double price});
+      double price,
+      String pictureContentType,
+      String options,
+      String licensePlate,
+      int engineSize,
+      int modelYear,
+      DateTime since,
+      int nrOfSeats,
+      String body,
+      double latitude});
 }
 
 /// @nodoc
@@ -132,6 +335,15 @@ class __$$CarImplCopyWithImpl<$Res> extends _$CarCopyWithImpl<$Res, _$CarImpl>
     Object? picture = null,
     Object? fuel = null,
     Object? price = null,
+    Object? pictureContentType = null,
+    Object? options = null,
+    Object? licensePlate = null,
+    Object? engineSize = null,
+    Object? modelYear = null,
+    Object? since = null,
+    Object? nrOfSeats = null,
+    Object? body = null,
+    Object? latitude = null,
   }) {
     return _then(_$CarImpl(
       id: null == id
@@ -158,6 +370,42 @@ class __$$CarImplCopyWithImpl<$Res> extends _$CarCopyWithImpl<$Res, _$CarImpl>
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
               as double,
+      pictureContentType: null == pictureContentType
+          ? _value.pictureContentType
+          : pictureContentType // ignore: cast_nullable_to_non_nullable
+              as String,
+      options: null == options
+          ? _value.options
+          : options // ignore: cast_nullable_to_non_nullable
+              as String,
+      licensePlate: null == licensePlate
+          ? _value.licensePlate
+          : licensePlate // ignore: cast_nullable_to_non_nullable
+              as String,
+      engineSize: null == engineSize
+          ? _value.engineSize
+          : engineSize // ignore: cast_nullable_to_non_nullable
+              as int,
+      modelYear: null == modelYear
+          ? _value.modelYear
+          : modelYear // ignore: cast_nullable_to_non_nullable
+              as int,
+      since: null == since
+          ? _value.since
+          : since // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      nrOfSeats: null == nrOfSeats
+          ? _value.nrOfSeats
+          : nrOfSeats // ignore: cast_nullable_to_non_nullable
+              as int,
+      body: null == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as String,
+      latitude: null == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -165,13 +413,22 @@ class __$$CarImplCopyWithImpl<$Res> extends _$CarCopyWithImpl<$Res, _$CarImpl>
 /// @nodoc
 @JsonSerializable()
 class _$CarImpl implements _Car {
-  const _$CarImpl(
+  _$CarImpl(
       {required this.id,
       required this.brand,
       required this.model,
       required this.picture,
       required this.fuel,
-      required this.price});
+      required this.price,
+      required this.pictureContentType,
+      required this.options,
+      required this.licensePlate,
+      required this.engineSize,
+      required this.modelYear,
+      required this.since,
+      required this.nrOfSeats,
+      required this.body,
+      required this.latitude});
 
   factory _$CarImpl.fromJson(Map<String, dynamic> json) =>
       _$$CarImplFromJson(json);
@@ -188,10 +445,28 @@ class _$CarImpl implements _Car {
   final String fuel;
   @override
   final double price;
+  @override
+  final String pictureContentType;
+  @override
+  final String options;
+  @override
+  final String licensePlate;
+  @override
+  final int engineSize;
+  @override
+  final int modelYear;
+  @override
+  final DateTime since;
+  @override
+  final int nrOfSeats;
+  @override
+  final String body;
+  @override
+  final double latitude;
 
   @override
   String toString() {
-    return 'Car(id: $id, brand: $brand, model: $model, picture: $picture, fuel: $fuel, price: $price)';
+    return 'Car(id: $id, brand: $brand, model: $model, picture: $picture, fuel: $fuel, price: $price, pictureContentType: $pictureContentType, options: $options, licensePlate: $licensePlate, engineSize: $engineSize, modelYear: $modelYear, since: $since, nrOfSeats: $nrOfSeats, body: $body, latitude: $latitude)';
   }
 
   @override
@@ -204,13 +479,43 @@ class _$CarImpl implements _Car {
             (identical(other.model, model) || other.model == model) &&
             (identical(other.picture, picture) || other.picture == picture) &&
             (identical(other.fuel, fuel) || other.fuel == fuel) &&
-            (identical(other.price, price) || other.price == price));
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.pictureContentType, pictureContentType) ||
+                other.pictureContentType == pictureContentType) &&
+            (identical(other.options, options) || other.options == options) &&
+            (identical(other.licensePlate, licensePlate) ||
+                other.licensePlate == licensePlate) &&
+            (identical(other.engineSize, engineSize) ||
+                other.engineSize == engineSize) &&
+            (identical(other.modelYear, modelYear) ||
+                other.modelYear == modelYear) &&
+            (identical(other.since, since) || other.since == since) &&
+            (identical(other.nrOfSeats, nrOfSeats) ||
+                other.nrOfSeats == nrOfSeats) &&
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, brand, model, picture, fuel, price);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      brand,
+      model,
+      picture,
+      fuel,
+      price,
+      pictureContentType,
+      options,
+      licensePlate,
+      engineSize,
+      modelYear,
+      since,
+      nrOfSeats,
+      body,
+      latitude);
 
   /// Create a copy of Car
   /// with the given fields replaced by the non-null parameter values.
@@ -229,13 +534,22 @@ class _$CarImpl implements _Car {
 }
 
 abstract class _Car implements Car {
-  const factory _Car(
+  factory _Car(
       {required final int id,
       required final String brand,
       required final String model,
       required final String picture,
       required final String fuel,
-      required final double price}) = _$CarImpl;
+      required final double price,
+      required final String pictureContentType,
+      required final String options,
+      required final String licensePlate,
+      required final int engineSize,
+      required final int modelYear,
+      required final DateTime since,
+      required final int nrOfSeats,
+      required final String body,
+      required final double latitude}) = _$CarImpl;
 
   factory _Car.fromJson(Map<String, dynamic> json) = _$CarImpl.fromJson;
 
@@ -251,6 +565,24 @@ abstract class _Car implements Car {
   String get fuel;
   @override
   double get price;
+  @override
+  String get pictureContentType;
+  @override
+  String get options;
+  @override
+  String get licensePlate;
+  @override
+  int get engineSize;
+  @override
+  int get modelYear;
+  @override
+  DateTime get since;
+  @override
+  int get nrOfSeats;
+  @override
+  String get body;
+  @override
+  double get latitude;
 
   /// Create a copy of Car
   /// with the given fields replaced by the non-null parameter values.
