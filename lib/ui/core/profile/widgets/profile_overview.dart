@@ -35,13 +35,25 @@ class ProfileOverview extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium),
         if (profile.rentals == null || profile.rentals!.isEmpty)
           const Text("No previous rentals")
-        else
+        else ...[
           RentalList(
             rentals: profile.rentals!
                 .where((rental) => rental.state == RentalState.returned)
                 .take(3)
                 .toList(),
-          )
+          ),
+          if (profile.rentals!
+                  .where((rental) => rental.state == RentalState.returned)
+                  .toList()
+                  .length >
+              3) ...[
+            const SizedBox(height: 5.0),
+            FilledButton(
+              onPressed: () {},
+              child: const Text("View all rentals"),
+            )
+          ]
+        ]
       ],
     );
   }
