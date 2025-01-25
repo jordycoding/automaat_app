@@ -1,4 +1,6 @@
 import 'package:automaat_app/data/services/api/model/customer_resource/customer_resource.dart';
+import 'package:automaat_app/data/services/api/model/rental/rental.dart';
+import 'package:automaat_app/ui/core/profile/widgets/rental_list.dart';
 import 'package:flutter/material.dart';
 
 class ProfileOverview extends StatelessWidget {
@@ -27,7 +29,18 @@ class ProfileOverview extends StatelessWidget {
           Text("Postal code: ${profile.location!.postalCode ?? 'n/a'}"),
           Text("City: ${profile.location!.city ?? 'n/a'}"),
           Text("State/Province: ${profile.location!.stateProvince ?? 'n/a'}"),
-        ]
+        ],
+        const SizedBox(height: 10),
+        Text("Previous rentals",
+            style: Theme.of(context).textTheme.titleMedium),
+        if (profile.rentals == null || profile.rentals!.isEmpty)
+          const Text("No previous rentals")
+        else
+          RentalList(
+            rentals: profile.rentals!
+                .where((rental) => rental.state == RentalState.returned)
+                .toList(),
+          )
       ],
     );
   }

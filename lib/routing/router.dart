@@ -94,7 +94,7 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
 Future<String?> _redirect(BuildContext context, GoRouterState state) async {
   final loggedIn = await context.read<AuthRepository>().isAuthenticated;
   final loggingIn = state.matchedLocation == AppRoutes.login;
-    final registering = state.matchedLocation == AppRoutes.register;
+  final registering = state.matchedLocation == AppRoutes.register;
 
   // If not logged in, go to login page
   if (!loggedIn && !registering) {

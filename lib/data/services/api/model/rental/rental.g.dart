@@ -13,7 +13,7 @@ _$RentalImpl _$$RentalImplFromJson(Map<String, dynamic> json) => _$RentalImpl(
       latitude: (json['latitude'] as num).toDouble(),
       fromDate: json['fromDate'] as String,
       toDate: json['toDate'] as String,
-      state: $enumDecodeNullable(_$StateEnumMap, json['state']),
+      state: $enumDecodeNullable(_$RentalStateEnumMap, json['state']),
       inspections: (json['inspections'] as List<dynamic>?)
           ?.map((e) => Inspection.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -31,15 +31,15 @@ Map<String, dynamic> _$$RentalImplToJson(_$RentalImpl instance) =>
       'latitude': instance.latitude,
       'fromDate': instance.fromDate,
       'toDate': instance.toDate,
-      'state': _$StateEnumMap[instance.state],
+      'state': _$RentalStateEnumMap[instance.state],
       'inspections': instance.inspections,
       'customer': instance.customer,
       'car': instance.car,
     };
 
-const _$StateEnumMap = {
-  State.active: 'ACTIVE',
-  State.reserved: 'RESERVED',
-  State.pickup: 'PICKUP',
-  State.returned: 'RETURNED',
+const _$RentalStateEnumMap = {
+  RentalState.active: 'ACTIVE',
+  RentalState.reserved: 'RESERVED',
+  RentalState.pickup: 'PICKUP',
+  RentalState.returned: 'RETURNED',
 };

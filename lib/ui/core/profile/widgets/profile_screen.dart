@@ -56,10 +56,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             );
           }
           if (profile != null) {
-          return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ProfileOverview(profile: profile)
-          );
+            return Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ProfileOverview(profile: profile),
+            );
           }
           return child!;
         },

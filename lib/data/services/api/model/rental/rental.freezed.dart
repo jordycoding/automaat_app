@@ -26,7 +26,7 @@ mixin _$Rental {
   double get latitude => throw _privateConstructorUsedError;
   String get fromDate => throw _privateConstructorUsedError;
   String get toDate => throw _privateConstructorUsedError;
-  State? get state => throw _privateConstructorUsedError;
+  RentalState? get state => throw _privateConstructorUsedError;
   List<Inspection>? get inspections => throw _privateConstructorUsedError;
   CustomerResource? get customer => throw _privateConstructorUsedError;
   Car get car => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $RentalCopyWith<$Res> {
       double latitude,
       String fromDate,
       String toDate,
-      State? state,
+      RentalState? state,
       List<Inspection>? inspections,
       CustomerResource? customer,
       Car car});
@@ -115,7 +115,7 @@ class _$RentalCopyWithImpl<$Res, $Val extends Rental>
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as State?,
+              as RentalState?,
       inspections: freezed == inspections
           ? _value.inspections
           : inspections // ignore: cast_nullable_to_non_nullable
@@ -170,7 +170,7 @@ abstract class _$$RentalImplCopyWith<$Res> implements $RentalCopyWith<$Res> {
       double latitude,
       String fromDate,
       String toDate,
-      State? state,
+      RentalState? state,
       List<Inspection>? inspections,
       CustomerResource? customer,
       Car car});
@@ -233,7 +233,7 @@ class __$$RentalImplCopyWithImpl<$Res>
       state: freezed == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
-              as State?,
+              as RentalState?,
       inspections: freezed == inspections
           ? _value._inspections
           : inspections // ignore: cast_nullable_to_non_nullable
@@ -282,7 +282,7 @@ class _$RentalImpl implements _Rental {
   @override
   final String toDate;
   @override
-  final State? state;
+  final RentalState? state;
   final List<Inspection>? _inspections;
   @override
   List<Inspection>? get inspections {
@@ -364,7 +364,7 @@ abstract class _Rental implements Rental {
       required final double latitude,
       required final String fromDate,
       required final String toDate,
-      final State? state,
+      final RentalState? state,
       final List<Inspection>? inspections,
       final CustomerResource? customer,
       required final Car car}) = _$RentalImpl;
@@ -384,7 +384,7 @@ abstract class _Rental implements Rental {
   @override
   String get toDate;
   @override
-  State? get state;
+  RentalState? get state;
   @override
   List<Inspection>? get inspections;
   @override

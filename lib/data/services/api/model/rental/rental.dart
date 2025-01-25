@@ -16,7 +16,7 @@ class Rental with _$Rental {
     required double latitude,
     required String fromDate,
     required String toDate,
-    State? state,
+    RentalState? state,
     List<Inspection>? inspections,
     CustomerResource? customer,
     required Car car,
@@ -25,7 +25,7 @@ class Rental with _$Rental {
   factory Rental.fromJson(Map<String, Object?> json) => _$RentalFromJson(json);
 }
 
-enum State {
+enum RentalState {
   @JsonValue("ACTIVE")
   active,
   @JsonValue("RESERVED")
