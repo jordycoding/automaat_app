@@ -94,7 +94,7 @@ class __$$CarListHolderImplCopyWithImpl<$Res>
     Object? data = null,
   }) {
     return _then(_$CarListHolderImpl(
-      null == data
+      data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
               as List<Car>,
@@ -105,7 +105,7 @@ class __$$CarListHolderImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CarListHolderImpl implements _CarListHolder {
-  const _$CarListHolderImpl(final List<Car> data) : _data = data;
+  const _$CarListHolderImpl({required final List<Car> data}) : _data = data;
 
   factory _$CarListHolderImpl.fromJson(Map<String, dynamic> json) =>
       _$$CarListHolderImplFromJson(json);
@@ -153,7 +153,8 @@ class _$CarListHolderImpl implements _CarListHolder {
 }
 
 abstract class _CarListHolder implements CarListHolder {
-  const factory _CarListHolder(final List<Car> data) = _$CarListHolderImpl;
+  const factory _CarListHolder({required final List<Car> data}) =
+      _$CarListHolderImpl;
 
   factory _CarListHolder.fromJson(Map<String, dynamic> json) =
       _$CarListHolderImpl.fromJson;

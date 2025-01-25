@@ -8,7 +8,7 @@ part of 'car_list_holder.dart';
 
 _$CarListHolderImpl _$$CarListHolderImplFromJson(Map<String, dynamic> json) =>
     _$CarListHolderImpl(
-      (json['data'] as List<dynamic>)
+      data: (json['data'] as List<dynamic>)
           .map((e) => Car.fromJson(e as Map<String, dynamic>))
           .toList(),
     );

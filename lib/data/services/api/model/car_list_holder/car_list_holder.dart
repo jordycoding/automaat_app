@@ -6,7 +6,7 @@ part "car_list_holder.g.dart";
 
 @freezed
 class CarListHolder with _$CarListHolder {
-  const factory CarListHolder(List<Car> data) = _CarListHolder;
+  const factory CarListHolder({required List<Car> data}) = _CarListHolder;
 
   factory CarListHolder.fromJson(Map<String, dynamic> json) =>
       _$CarListHolderFromJson(json);

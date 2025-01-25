@@ -13,7 +13,7 @@ abstract class CarList with _$CarList {
 }
 
 @freezed
-abstract class Car with _$Car {
+class Car with _$Car {
   factory Car({
     required int id,
     required String brand,

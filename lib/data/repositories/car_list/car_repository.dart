@@ -9,7 +9,7 @@ class CarRepository {
   CarRepository(this._apiClient);
 
   Future<Result<List<Car>>> getCars({bool forceRefresh = false}) async {
-    if (_cachedCars != null && !forceRefresh) return Result.ok(_cachedCars!);
+    // if (_cachedCars != null && !forceRefresh) return Result.ok(_cachedCars!);
 
     final result = await _apiClient.getCars();
     if (result is Ok<List<Car>>) {

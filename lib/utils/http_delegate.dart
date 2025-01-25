@@ -7,7 +7,6 @@ import 'package:logging/logging.dart';
 enum RequestType { json, plain }
 
 mixin HttpDelegate {
-  final _log = Logger("HttpDelegate");
   Future<Result<T>> getRequest<T>(
     Uri uri,
     HttpClient Function() clientFactory, [
@@ -15,6 +14,7 @@ mixin HttpDelegate {
     T Function(List<Object?>)? fromList,
     Future<void> Function(HttpHeaders)? addHeaders,
     bool returnRaw = false,
+    Logger? log,
   ]) async {
     final client = clientFactory();
     try {
@@ -24,15 +24,15 @@ mixin HttpDelegate {
       }
       final response = await request.close();
       if (response.statusCode >= 200 && response.statusCode <= 300) {
-        if (fromJson == null && !returnRaw) {
+        if (fromJson == null && fromList == null && !returnRaw) {
           return Result.ok(null as T);
         } else if (returnRaw) {
           final stringData = await response.transform(utf8.decoder).join();
           return Result.ok(stringData as T);
         } else if (fromList != null) {
           final stringData = await response.transform(utf8.decoder).join();
-          _log.info(stringData);
-          return Result.ok(fromList(jsonDecode(stringData)));
+          final rawList = jsonDecode(stringData);
+          return Result.ok(fromList(rawList));
         } else if (fromJson != null) {
           final stringData = await response.transform(utf8.decoder).join();
           return Result.ok(fromJson(jsonDecode(stringData)));
