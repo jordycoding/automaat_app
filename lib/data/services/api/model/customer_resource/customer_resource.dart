@@ -12,9 +12,9 @@ class CustomerResource with _$CustomerResource {
   const factory CustomerResource({
     required int id,
     int? nr,
-    required String firstName,
-    required String lastName,
-    required String from,
+    String? firstName,
+    String? lastName,
+    String? from,
     ManagedUserVm? systemUser,
     List<Rental>? rentals,
     Location? location,

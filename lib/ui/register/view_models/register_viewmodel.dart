@@ -3,8 +3,8 @@ import 'package:automaat_app/utils/command.dart';
 import 'package:automaat_app/utils/result.dart';
 import 'package:logging/logging.dart';
 
-class RegisterViewmodel {
-  RegisterViewmodel({required AuthRepository authRepository})
+class RegisterViewModel {
+  RegisterViewModel({required AuthRepository authRepository})
       : _authRepository = authRepository {
     register = Command1<
         void,

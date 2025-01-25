@@ -29,6 +29,6 @@ class ApiClient with HttpDelegate {
 
   Future<Result<CustomerResource>> customerMe() async {
     return getRequest(Uri.parse("${AppConstants.serverUrl}/AM/me"),
-        _clientFactory, CustomerResource.fromJson);
+        _clientFactory, CustomerResource.fromJson, _authHeader);
   }
 }

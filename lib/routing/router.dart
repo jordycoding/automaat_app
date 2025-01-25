@@ -3,6 +3,7 @@ import 'package:automaat_app/data/repositories/car_list/car_repository.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/car_list/view_model/car_list_viewmodel.dart';
 import 'package:automaat_app/ui/car_list/widgets/car_list_screen.dart';
+import 'package:automaat_app/ui/core/profile/view_models/profile_viewmodel.dart';
 import 'package:automaat_app/ui/core/profile/widgets/profile_screen.dart';
 import 'package:automaat_app/ui/core/ui/scaffold_nested_navigation.dart';
 import 'package:automaat_app/ui/home/widgets/home_screen.dart';
@@ -38,7 +39,7 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
         GoRoute(
           path: AppRoutes.register,
           builder: (context, state) => RegisterScreen(
-            viewModel: RegisterViewmodel(
+            viewModel: RegisterViewModel(
               authRepository: context.read(),
             ),
           ),
@@ -65,8 +66,12 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
               routes: [
                 GoRoute(
                   path: AppRoutes.profile,
-                  pageBuilder: (context, state) => const NoTransitionPage(
-                    child: ProfileScreen(),
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    child: ProfileScreen(
+                      viewModel: ProfileViewModel(
+                        profileRepository: context.read(),
+                      ),
+                    ),
                   ),
                 )
               ],
@@ -89,9 +94,10 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
 Future<String?> _redirect(BuildContext context, GoRouterState state) async {
   final loggedIn = await context.read<AuthRepository>().isAuthenticated;
   final loggingIn = state.matchedLocation == AppRoutes.login;
+    final registering = state.matchedLocation == AppRoutes.register;
 
   // If not logged in, go to login page
-  if (!loggedIn) {
+  if (!loggedIn && !registering) {
     return AppRoutes.login;
   }
 

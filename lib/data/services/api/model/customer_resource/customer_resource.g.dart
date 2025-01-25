@@ -11,9 +11,9 @@ _$CustomerResourceImpl _$$CustomerResourceImplFromJson(
     _$CustomerResourceImpl(
       id: (json['id'] as num).toInt(),
       nr: (json['nr'] as num?)?.toInt(),
-      firstName: json['firstName'] as String,
-      lastName: json['lastName'] as String,
-      from: json['from'] as String,
+      firstName: json['firstName'] as String?,
+      lastName: json['lastName'] as String?,
+      from: json['from'] as String?,
       systemUser: json['systemUser'] == null
           ? null
           : ManagedUserVm.fromJson(json['systemUser'] as Map<String, dynamic>),

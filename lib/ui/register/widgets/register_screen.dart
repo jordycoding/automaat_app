@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key, required this.viewModel});
 
-  final RegisterViewmodel viewModel;
+  final RegisterViewModel viewModel;
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();

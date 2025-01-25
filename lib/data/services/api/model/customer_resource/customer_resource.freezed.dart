@@ -22,9 +22,9 @@ CustomerResource _$CustomerResourceFromJson(Map<String, dynamic> json) {
 mixin _$CustomerResource {
   int get id => throw _privateConstructorUsedError;
   int? get nr => throw _privateConstructorUsedError;
-  String get firstName => throw _privateConstructorUsedError;
-  String get lastName => throw _privateConstructorUsedError;
-  String get from => throw _privateConstructorUsedError;
+  String? get firstName => throw _privateConstructorUsedError;
+  String? get lastName => throw _privateConstructorUsedError;
+  String? get from => throw _privateConstructorUsedError;
   ManagedUserVm? get systemUser => throw _privateConstructorUsedError;
   List<Rental>? get rentals => throw _privateConstructorUsedError;
   Location? get location => throw _privateConstructorUsedError;
@@ -48,9 +48,9 @@ abstract class $CustomerResourceCopyWith<$Res> {
   $Res call(
       {int id,
       int? nr,
-      String firstName,
-      String lastName,
-      String from,
+      String? firstName,
+      String? lastName,
+      String? from,
       ManagedUserVm? systemUser,
       List<Rental>? rentals,
       Location? location});
@@ -76,9 +76,9 @@ class _$CustomerResourceCopyWithImpl<$Res, $Val extends CustomerResource>
   $Res call({
     Object? id = null,
     Object? nr = freezed,
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? from = null,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? from = freezed,
     Object? systemUser = freezed,
     Object? rentals = freezed,
     Object? location = freezed,
@@ -92,18 +92,18 @@ class _$CustomerResourceCopyWithImpl<$Res, $Val extends CustomerResource>
           ? _value.nr
           : nr // ignore: cast_nullable_to_non_nullable
               as int?,
-      firstName: null == firstName
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      from: null == from
+              as String?,
+      from: freezed == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       systemUser: freezed == systemUser
           ? _value.systemUser
           : systemUser // ignore: cast_nullable_to_non_nullable
@@ -159,9 +159,9 @@ abstract class _$$CustomerResourceImplCopyWith<$Res>
   $Res call(
       {int id,
       int? nr,
-      String firstName,
-      String lastName,
-      String from,
+      String? firstName,
+      String? lastName,
+      String? from,
       ManagedUserVm? systemUser,
       List<Rental>? rentals,
       Location? location});
@@ -187,9 +187,9 @@ class __$$CustomerResourceImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nr = freezed,
-    Object? firstName = null,
-    Object? lastName = null,
-    Object? from = null,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? from = freezed,
     Object? systemUser = freezed,
     Object? rentals = freezed,
     Object? location = freezed,
@@ -203,18 +203,18 @@ class __$$CustomerResourceImplCopyWithImpl<$Res>
           ? _value.nr
           : nr // ignore: cast_nullable_to_non_nullable
               as int?,
-      firstName: null == firstName
+      firstName: freezed == firstName
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
+              as String?,
+      lastName: freezed == lastName
           ? _value.lastName
           : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
-      from: null == from
+              as String?,
+      from: freezed == from
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       systemUser: freezed == systemUser
           ? _value.systemUser
           : systemUser // ignore: cast_nullable_to_non_nullable
@@ -237,9 +237,9 @@ class _$CustomerResourceImpl implements _CustomerResource {
   const _$CustomerResourceImpl(
       {required this.id,
       this.nr,
-      required this.firstName,
-      required this.lastName,
-      required this.from,
+      this.firstName,
+      this.lastName,
+      this.from,
       this.systemUser,
       final List<Rental>? rentals,
       this.location})
@@ -253,11 +253,11 @@ class _$CustomerResourceImpl implements _CustomerResource {
   @override
   final int? nr;
   @override
-  final String firstName;
+  final String? firstName;
   @override
-  final String lastName;
+  final String? lastName;
   @override
-  final String from;
+  final String? from;
   @override
   final ManagedUserVm? systemUser;
   final List<Rental>? _rentals;
@@ -331,9 +331,9 @@ abstract class _CustomerResource implements CustomerResource {
   const factory _CustomerResource(
       {required final int id,
       final int? nr,
-      required final String firstName,
-      required final String lastName,
-      required final String from,
+      final String? firstName,
+      final String? lastName,
+      final String? from,
       final ManagedUserVm? systemUser,
       final List<Rental>? rentals,
       final Location? location}) = _$CustomerResourceImpl;
@@ -346,11 +346,11 @@ abstract class _CustomerResource implements CustomerResource {
   @override
   int? get nr;
   @override
-  String get firstName;
+  String? get firstName;
   @override
-  String get lastName;
+  String? get lastName;
   @override
-  String get from;
+  String? get from;
   @override
   ManagedUserVm? get systemUser;
   @override
