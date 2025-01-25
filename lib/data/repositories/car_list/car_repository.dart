@@ -8,16 +8,17 @@ class CarRepository {
 
   CarRepository(this._apiClient);
 
-  Future<List<Car>> getCars({bool forceRefresh = false}) async {
-    if (_cachedCars != null && !forceRefresh) return _cachedCars!;
-    
+  Future<Result<List<Car>>> getCars({bool forceRefresh = false}) async {
+    if (_cachedCars != null && !forceRefresh) return Result.ok(_cachedCars!);
+
     final result = await _apiClient.getCars();
-    
-    return switch (result) {
-      Ok(value: final cars) => _cachedCars = cars,
-      Error(error: final e) => throw e,
-    };
+    if (result is Ok<List<Car>>) {
+      _cachedCars = result.value;
+    }
+
+    return result;
   }
 
   void invalidateCache() => _cachedCars = null;
 }
+

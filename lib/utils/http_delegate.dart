@@ -7,10 +7,12 @@ import 'package:logging/logging.dart';
 enum RequestType { json, plain }
 
 mixin HttpDelegate {
+  final _log = Logger("HttpDelegate");
   Future<Result<T>> getRequest<T>(
     Uri uri,
     HttpClient Function() clientFactory, [
     T Function(Map<String, Object?>)? fromJson,
+    T Function(List<Object?>)? fromList,
     Future<void> Function(HttpHeaders)? addHeaders,
     bool returnRaw = false,
   ]) async {
@@ -27,6 +29,10 @@ mixin HttpDelegate {
         } else if (returnRaw) {
           final stringData = await response.transform(utf8.decoder).join();
           return Result.ok(stringData as T);
+        } else if (fromList != null) {
+          final stringData = await response.transform(utf8.decoder).join();
+          _log.info(stringData);
+          return Result.ok(fromList(jsonDecode(stringData)));
         } else if (fromJson != null) {
           final stringData = await response.transform(utf8.decoder).join();
           return Result.ok(fromJson(jsonDecode(stringData)));
@@ -49,6 +55,7 @@ mixin HttpDelegate {
   Future<Result<T>> postRequest<T>(
       Uri uri, HttpClient Function() clientFactory, Object body,
       [T Function(Map<String, Object?>)? fromJson,
+      T Function(List<Object?>)? fromList,
       Logger? log,
       RequestType type = RequestType.json,
       Future<void> Function(HttpHeaders)? addHeaders]) async {

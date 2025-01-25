@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:automaat_app/config/constants.dart';
 import 'package:automaat_app/data/services/api/model/car_list/car_list.dart';
+import 'package:automaat_app/data/services/api/model/car_list_holder/car_list_holder.dart';
 import 'package:automaat_app/data/services/api/model/customer_resource/customer_resource.dart';
 import 'package:automaat_app/utils/http_delegate.dart';
 import 'package:automaat_app/utils/result.dart';
@@ -28,12 +29,11 @@ class ApiClient with HttpDelegate {
 
   // Auto endpoints
   Future<Result<List<Car>>> getCars() async {
-    return getRequest<List<Car>>(
+    return getRequest(
       Uri.parse("${AppConstants.serverUrl}/cars"),
       _clientFactory,
-      (dynamic json) => (json as List).map((e) {
-        return Car.fromJson(e as Map<String, dynamic>);
-      }).toList(),
+      null,
+      (List<Object?> json) => (CarListHolder.fromJson({"data": json}).data),
       _authHeader,
     );
   }
@@ -44,6 +44,7 @@ class ApiClient with HttpDelegate {
       Uri.parse("${AppConstants.serverUrl}/AM/me"),
       _clientFactory,
       CustomerResource.fromJson,
+      null,
       _authHeader,
     );
   }
@@ -53,6 +54,7 @@ class ApiClient with HttpDelegate {
     return getRequest<String>(
       Uri.parse("${AppConstants.serverUrl}/authenticate"),
       _clientFactory,
+      null,
       null,
       _authHeader,
       true,
