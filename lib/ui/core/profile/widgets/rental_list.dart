@@ -8,8 +8,24 @@ class RentalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return ListView.builder(
+      itemCount: rentals.length,
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) {
+        final item = rentals[index];
+        return Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(Icons.car_rental),
+                title: Text("${item.car.brand} ${item.car.model}"),
+                subtitle: Text("From ${item.fromDate} ${item.toDate}"),
+              )
+            ],
+          ),
+        );
+      },
     );
   }
 }

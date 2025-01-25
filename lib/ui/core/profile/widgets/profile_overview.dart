@@ -39,6 +39,7 @@ class ProfileOverview extends StatelessWidget {
           RentalList(
             rentals: profile.rentals!
                 .where((rental) => rental.state == RentalState.returned)
+                .take(3)
                 .toList(),
           )
       ],
