@@ -38,43 +38,53 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: const Text("Your profile"),
       ),
-      body: ListenableBuilder(
-        listenable: Listenable.merge([
-          widget.viewModel.getProfile,
-        ]),
-        builder: (context, child) {
-          final profile = widget.viewModel.profile;
-          if (widget.viewModel.getProfile.running) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          if (widget.viewModel.getProfile.error) {
-            return const Center(
-              child: Text("Error fetching profile"),
-            );
-          }
-          if (profile != null) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: <Widget>[
-                  ProfileOverview(profile: profile),
-                  const SizedBox(height: 10),
-                  LogoutButton(logout: widget.viewModel.logout.execute)
-                ],
-              ),
-            );
-          }
-          return Column(
-            children: <Widget>[
-              Text("No profile info available"),
-              const SizedBox(height: 10),
-              LogoutButton(logout: widget.viewModel.logout.execute)
-            ],
-          );
+      body: RefreshIndicator(
+        onRefresh: () {
+          return widget.viewModel.getProfile.execute();
         },
+        child: ListView(
+          children: [
+            ListenableBuilder(
+              listenable: Listenable.merge([
+                widget.viewModel.getProfile,
+              ]),
+              builder: (context, child) {
+                final profile = widget.viewModel.profile;
+                if (widget.viewModel.getProfile.running) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+
+                if (widget.viewModel.getProfile.error) {
+                  return const Center(
+                    child: Text("Error fetching profile"),
+                  );
+                }
+                if (profile != null) {
+                  return Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        ProfileOverview(profile: profile),
+                        const SizedBox(height: 10),
+                        LogoutButton(logout: widget.viewModel.logout.execute)
+                      ],
+                    ),
+                  );
+                }
+                return Column(
+                  children: <Widget>[
+                    Text("No profile info available"),
+                    const SizedBox(height: 10),
+                    LogoutButton(logout: widget.viewModel.logout.execute)
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
