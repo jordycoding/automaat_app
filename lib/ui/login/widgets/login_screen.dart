@@ -120,7 +120,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Enter your email",
                       );
                       if (result != null) {
-                        widget.viewModel.resetPassword.execute(result);
+                        final (email, _) = result;
+                        widget.viewModel.resetPassword.execute(email);
                       }
                     },
                     child: const Text("Forgot password"),
