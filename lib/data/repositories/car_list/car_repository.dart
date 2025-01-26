@@ -18,4 +18,13 @@ class CarRepository {
 
     return result;
   }
+
+    Future<Result<Car>> fetchCarDetails(int carId) async {
+    try {
+      final result = await _apiClient.getCarDetails(carId);
+      return result;
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+  }
 }

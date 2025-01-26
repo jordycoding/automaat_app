@@ -1,5 +1,7 @@
 import 'package:automaat_app/data/repositories/auth/auth_repository.dart';
 import 'package:automaat_app/data/repositories/car_list/car_repository.dart';
+import 'package:automaat_app/data/repositories/rental/rental_repository.dart';
+import 'package:automaat_app/data/repositories/profile/profile_repository.dart';
 import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/car_list/view_model/car_list_viewmodel.dart';
@@ -47,11 +49,14 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
           path: '${AppRoutes.carDetails}/:carId',
           builder: (context, state) {
             final carId = int.parse(state.pathParameters['carId']!);
+            
             return MultiProvider(
               providers: [
                 ChangeNotifierProvider(
                   create: (context) => CarDetailViewModel(
-                    repository: context.read<CarRepository>(),
+                    carRepository: context.read<CarRepository>(),
+                    rentalRepository: context.read<RentalRepository>(),
+                    profileRepository: context.read<ProfileRepository>(),
                     carId: carId,
                   ),
                 ),

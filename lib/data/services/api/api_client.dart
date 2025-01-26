@@ -43,6 +43,16 @@ class ApiClient with HttpDelegate {
     );
   }
 
+    Future<Result<Car>> getCarDetails(int carId) async {
+    return getRequest(
+      Uri.parse("${AppConstants.serverUrl}/cars/$carId"),
+      _clientFactory,
+      Car.fromJson,
+      null,
+      _authHeader,
+    );
+  }
+
   // Customer endpoints
   Future<Result<CustomerResource>> customerMe() async {
     return getRequest(
@@ -63,6 +73,29 @@ class ApiClient with HttpDelegate {
       null,
       _authHeader,
       true,
+    );
+  }
+
+    Future<Result<Rental>> createRental({
+    required int carId,
+    required int customerId,
+    required DateTime startDate,
+    required DateTime endDate,
+  }) async {
+    return postRequest(
+      Uri.parse("${AppConstants.serverUrl}/rentals"),
+      _clientFactory,
+      {
+        'carId': carId,
+        'customerId': customerId,
+        'startDate': startDate.toIso8601String(),
+        'endDate': endDate.toIso8601String(),
+      },
+      Rental.fromJson,
+      null,
+      null,
+      RequestType.json,
+      _authHeader,
     );
   }
 

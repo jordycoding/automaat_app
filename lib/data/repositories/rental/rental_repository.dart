@@ -19,6 +19,20 @@ class RentalRepository {
     return await _apiClient.deleteRental(rentalId);
   }
 
+  Future<Result<Rental>> createRental({
+    required int carId,
+    required DateTime startDate,
+    required DateTime endDate,
+    required int customerId,
+  }) async {
+    return await _apiClient.createRental(
+      carId: carId,
+      startDate: startDate,
+      endDate: endDate,
+      customerId: customerId,
+    );
+  }
+
   Future<Result<PostInspectionResponse>> createInspection({
     required String code,
     required int odometer,
