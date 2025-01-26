@@ -11,12 +11,18 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends State<ProfileScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   void initState() {
     super.initState();
     widget.viewModel.getProfile.addListener(_onResult);
-    widget.viewModel.getProfile.execute();
+    if (widget.viewModel.profile == null) {
+      widget.viewModel.getProfile.execute();
+    }
   }
 
   @override

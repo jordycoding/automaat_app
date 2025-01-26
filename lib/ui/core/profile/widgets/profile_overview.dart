@@ -44,20 +44,14 @@ class ProfileOverview extends StatelessWidget {
                 .take(3)
                 .toList(),
           ),
-          if (profile.rentals!
-                  .where((rental) => rental.state == RentalState.returned)
-                  .toList()
-                  .length >
-              3) ...[
-            const SizedBox(height: 5.0),
-            FilledButton(
-              onPressed: () {
-                context.push(AppRoutes.pastRentals);
-              },
-              child: const Text("View all rentals"),
-            )
-          ]
-        ],
+          const SizedBox(height: 5.0),
+          FilledButton(
+            onPressed: () {
+              context.go(AppRoutes.pastRentals);
+            },
+            child: const Text("View all rental details"),
+          )
+        ]
       ],
     );
   }

@@ -23,7 +23,7 @@ final _shellNavigatorHomeKey =
     GlobalKey<NavigatorState>(debugLabel: "shellHome");
 final _shellNavigatoProfileKey =
     GlobalKey<NavigatorState>(debugLabel: "shellProfile");
-final _shellNavigatorCarsKey = 
+final _shellNavigatorCarsKey =
     GlobalKey<NavigatorState>(debugLabel: "shellCars");
 
 GoRouter router(AuthRepository authRepository) => GoRouter(
@@ -89,17 +89,30 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                 GoRoute(
                   path: AppRoutes.profile,
                   pageBuilder: (context, state) => NoTransitionPage(
-                    child: ProfileScreen(
-                      viewModel: ProfileViewModel(
+                    key: state.pageKey,
+                    child: ChangeNotifierProvider(
+                      create: (context) => ProfileViewModel(
                         profileRepository: context.read(),
                         authRepository: context.read(),
+                      ),
+                      child: Builder(
+                        builder: (context) {
+                          final profileViewModel =
+                              context.watch<ProfileViewModel>();
+                          return ProfileScreen(
+                            viewModel: profileViewModel,
+                          );
+                        },
                       ),
                     ),
                   ),
                   routes: [
                     GoRoute(
                       path: "pastRentals",
-                      builder: (context, state) => PastRentalsScreen(),
+                      pageBuilder: (context, state) => NoTransitionPage(
+                        key: state.pageKey,
+                        child: const PastRentalsScreen(),
+                      ),
                     )
                   ],
                 )
