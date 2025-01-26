@@ -8,6 +8,7 @@ import 'package:automaat_app/data/services/api/model/post_inspection_request/pos
 import 'package:automaat_app/data/services/api/model/post_inspection_response/post_inspection_response.dart';
 import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:automaat_app/data/services/api/model/rental_list_holder/rental_list_holder.dart';
+import 'package:automaat_app/data/services/shared_preferences_service.dart';
 import 'package:automaat_app/utils/http_delegate.dart';
 import 'package:automaat_app/utils/result.dart';
 
@@ -15,10 +16,13 @@ typedef AuthHeaderProvider = String? Function();
 
 class ApiClient with HttpDelegate {
   ApiClient({
+    required SharedPreferencesService sharedPreferencesService,
     HttpClient Function()? clientFactory,
-  }) : _clientFactory = clientFactory ?? HttpClient.new;
+  })  : _clientFactory = clientFactory ?? HttpClient.new,
+        _sharedPreferencesService = sharedPreferencesService;
 
   final HttpClient Function() _clientFactory;
+  final SharedPreferencesService _sharedPreferencesService;
   AuthHeaderProvider? _authHeaderProvider;
 
   set authHeaderProvider(AuthHeaderProvider? value) {
@@ -40,6 +44,9 @@ class ApiClient with HttpDelegate {
       null,
       (List<Object?> json) => (CarListHolder.fromJson({"data": json}).data),
       _authHeader,
+      false,
+      null,
+      _sharedPreferencesService,
     );
   }
 
@@ -56,12 +63,14 @@ class ApiClient with HttpDelegate {
   // Customer endpoints
   Future<Result<CustomerResource>> customerMe() async {
     return getRequest(
-      Uri.parse("${AppConstants.serverUrl}/AM/me"),
-      _clientFactory,
-      CustomerResource.fromJson,
-      null,
-      _authHeader,
-    );
+        Uri.parse("${AppConstants.serverUrl}/AM/me"),
+        _clientFactory,
+        CustomerResource.fromJson,
+        null,
+        _authHeader,
+        false,
+        null,
+        _sharedPreferencesService);
   }
 
   // Auth check
@@ -110,6 +119,9 @@ class ApiClient with HttpDelegate {
       null,
       (List<Object?> json) => (RentalListHolder.fromJson({"data": json}).data),
       _authHeader,
+      false,
+      null,
+      _sharedPreferencesService,
     );
   }
 

@@ -28,7 +28,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final rootNavigatorKey = GlobalKey<NavigatorState>();
 final _shellNavigatorHomeKey =
     GlobalKey<NavigatorState>(debugLabel: "shellHome");
 final _shellNavigatoProfileKey =
@@ -40,7 +40,7 @@ final _shellNavigatorRentalsKey =
 
 GoRouter router(AuthRepository authRepository) => GoRouter(
       initialLocation: AppRoutes.login,
-      navigatorKey: _rootNavigatorKey,
+      navigatorKey: rootNavigatorKey,
       debugLogDiagnostics: true,
       redirect: _redirect,
       refreshListenable: authRepository,

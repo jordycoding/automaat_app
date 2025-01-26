@@ -17,7 +17,7 @@
         buildToolsVersion = "33.0.1";
         androidComposition = pkgs.androidenv.composeAndroidPackages {
           buildToolsVersions = [ buildToolsVersion "28.0.3" ];
-          platformVersions = [ "34" "28" ];
+          platformVersions = [ "34" "28" "33" ];
           abiVersions = [ "armeabi-v7a" "arm64-v8a" ];
         };
         androidSdk = androidComposition.androidsdk;
