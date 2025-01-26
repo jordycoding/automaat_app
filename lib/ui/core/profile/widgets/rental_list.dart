@@ -10,7 +10,8 @@ class RentalList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: rentals.length,
-      scrollDirection: Axis.horizontal,
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
       itemBuilder: (context, index) {
         final item = rentals[index];
         return Card(
@@ -19,7 +20,7 @@ class RentalList extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 leading: const Icon(Icons.car_rental),
-                title: Text("${item.car.brand} ${item.car.model}"),
+                title: Text("Rental"),
                 subtitle: Text("From ${item.fromDate} ${item.toDate}"),
               )
             ],

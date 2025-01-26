@@ -29,7 +29,7 @@ mixin _$Rental {
   RentalState? get state => throw _privateConstructorUsedError;
   List<Inspection>? get inspections => throw _privateConstructorUsedError;
   CustomerResource? get customer => throw _privateConstructorUsedError;
-  Car get car => throw _privateConstructorUsedError;
+  Car? get car => throw _privateConstructorUsedError;
 
   /// Serializes this Rental to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -55,10 +55,10 @@ abstract class $RentalCopyWith<$Res> {
       RentalState? state,
       List<Inspection>? inspections,
       CustomerResource? customer,
-      Car car});
+      Car? car});
 
   $CustomerResourceCopyWith<$Res>? get customer;
-  $CarCopyWith<$Res> get car;
+  $CarCopyWith<$Res>? get car;
 }
 
 /// @nodoc
@@ -85,7 +85,7 @@ class _$RentalCopyWithImpl<$Res, $Val extends Rental>
     Object? state = freezed,
     Object? inspections = freezed,
     Object? customer = freezed,
-    Object? car = null,
+    Object? car = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -124,10 +124,10 @@ class _$RentalCopyWithImpl<$Res, $Val extends Rental>
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
               as CustomerResource?,
-      car: null == car
+      car: freezed == car
           ? _value.car
           : car // ignore: cast_nullable_to_non_nullable
-              as Car,
+              as Car?,
     ) as $Val);
   }
 
@@ -149,8 +149,12 @@ class _$RentalCopyWithImpl<$Res, $Val extends Rental>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $CarCopyWith<$Res> get car {
-    return $CarCopyWith<$Res>(_value.car, (value) {
+  $CarCopyWith<$Res>? get car {
+    if (_value.car == null) {
+      return null;
+    }
+
+    return $CarCopyWith<$Res>(_value.car!, (value) {
       return _then(_value.copyWith(car: value) as $Val);
     });
   }
@@ -173,12 +177,12 @@ abstract class _$$RentalImplCopyWith<$Res> implements $RentalCopyWith<$Res> {
       RentalState? state,
       List<Inspection>? inspections,
       CustomerResource? customer,
-      Car car});
+      Car? car});
 
   @override
   $CustomerResourceCopyWith<$Res>? get customer;
   @override
-  $CarCopyWith<$Res> get car;
+  $CarCopyWith<$Res>? get car;
 }
 
 /// @nodoc
@@ -203,7 +207,7 @@ class __$$RentalImplCopyWithImpl<$Res>
     Object? state = freezed,
     Object? inspections = freezed,
     Object? customer = freezed,
-    Object? car = null,
+    Object? car = freezed,
   }) {
     return _then(_$RentalImpl(
       id: null == id
@@ -242,10 +246,10 @@ class __$$RentalImplCopyWithImpl<$Res>
           ? _value.customer
           : customer // ignore: cast_nullable_to_non_nullable
               as CustomerResource?,
-      car: null == car
+      car: freezed == car
           ? _value.car
           : car // ignore: cast_nullable_to_non_nullable
-              as Car,
+              as Car?,
     ));
   }
 }
@@ -263,7 +267,7 @@ class _$RentalImpl implements _Rental {
       this.state,
       final List<Inspection>? inspections,
       this.customer,
-      required this.car})
+      this.car})
       : _inspections = inspections;
 
   factory _$RentalImpl.fromJson(Map<String, dynamic> json) =>
@@ -296,7 +300,7 @@ class _$RentalImpl implements _Rental {
   @override
   final CustomerResource? customer;
   @override
-  final Car car;
+  final Car? car;
 
   @override
   String toString() {
@@ -367,7 +371,7 @@ abstract class _Rental implements Rental {
       final RentalState? state,
       final List<Inspection>? inspections,
       final CustomerResource? customer,
-      required final Car car}) = _$RentalImpl;
+      final Car? car}) = _$RentalImpl;
 
   factory _Rental.fromJson(Map<String, dynamic> json) = _$RentalImpl.fromJson;
 
@@ -390,7 +394,7 @@ abstract class _Rental implements Rental {
   @override
   CustomerResource? get customer;
   @override
-  Car get car;
+  Car? get car;
 
   /// Create a copy of Rental
   /// with the given fields replaced by the non-null parameter values.

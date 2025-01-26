@@ -19,7 +19,7 @@ class Rental with _$Rental {
     RentalState? state,
     List<Inspection>? inspections,
     CustomerResource? customer,
-    required Car car,
+    Car? car,
   }) = _Rental;
 
   factory Rental.fromJson(Map<String, Object?> json) => _$RentalFromJson(json);

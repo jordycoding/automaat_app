@@ -20,7 +20,9 @@ _$RentalImpl _$$RentalImplFromJson(Map<String, dynamic> json) => _$RentalImpl(
       customer: json['customer'] == null
           ? null
           : CustomerResource.fromJson(json['customer'] as Map<String, dynamic>),
-      car: Car.fromJson(json['car'] as Map<String, dynamic>),
+      car: json['car'] == null
+          ? null
+          : Car.fromJson(json['car'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$RentalImplToJson(_$RentalImpl instance) =>
