@@ -110,14 +110,55 @@ mixin HttpDelegate {
       }
       final response = await request.close();
       if (response.statusCode >= 200 && response.statusCode <= 300) {
-        if (fromJson == null) {
+        if (fromJson == null && fromList == null) {
           return Result.ok(null as T);
-        } else {
+        } else if (fromList != null) {
+          final stringData = await response.transform(utf8.decoder).join();
+          return Result.ok(fromList(jsonDecode(stringData)));
+        } else if (fromJson != null) {
           final stringData = await response.transform(utf8.decoder).join();
           return Result.ok(fromJson(jsonDecode(stringData)));
+        } else {
+          return Result.error(Exception("Please provide a parsing function"));
         }
       } else {
         return Result.error(Exception("Error posting to $uri"));
+      }
+    } on Exception catch (error) {
+      return Result.error(error);
+    } finally {
+      client.close();
+    }
+  }
+
+  Future<Result<T>> patchRequest<T>(
+      Uri uri, HttpClient Function() clientFactory, Object body,
+      [T Function(Map<String, Object?>)? fromJson,
+      T Function(List<Object?>)? fromList,
+      Future<void> Function(HttpHeaders)? addHeaders]) async {
+    final client = clientFactory();
+    try {
+      final request = await client.patchUrl(uri);
+      if (addHeaders != null) {
+        addHeaders(request.headers);
+      }
+      request.headers.contentType = ContentType.json;
+      request.write(body);
+      final response = await request.close();
+      if (response.statusCode >= 200 && response.statusCode <= 300) {
+        if (fromJson == null && fromList == null) {
+          return Result.ok(null as T);
+        } else if (fromList != null) {
+          final stringData = await response.transform(utf8.decoder).join();
+          return Result.ok(fromList(jsonDecode(stringData)));
+        } else if (fromJson != null) {
+          final stringData = await response.transform(utf8.decoder).join();
+          return Result.ok(fromJson(jsonDecode(stringData)));
+        } else {
+          return Result.error(Exception("Please provide a parsing function"));
+        }
+      } else {
+        return Result.error(Exception("Error patching $uri"));
       }
     } on Exception catch (error) {
       return Result.error(error);
