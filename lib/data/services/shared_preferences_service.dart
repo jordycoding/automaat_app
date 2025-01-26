@@ -33,4 +33,27 @@ class SharedPreferencesService {
       return Result.error(e);
     }
   }
+
+  Future<Result<void>> saveData(String key, String data) async {
+    try {
+      final sharedPreferences = await SharedPreferences.getInstance();
+      await sharedPreferences.setString(key, data);
+      return const Result.ok(null);
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+  }
+
+  Future<Result<String>> fetchData(String key) async {
+    try {
+      final sharedPreferences = await SharedPreferences.getInstance();
+      final result = sharedPreferences.getString(key);
+      if (result != null) {
+        return Result.ok(result);
+      }
+      return Result.error(Exception("No cache available"));
+    } on Exception catch (e) {
+      return Result.error(e);
+    }
+  }
 }
