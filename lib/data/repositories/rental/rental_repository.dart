@@ -11,9 +11,12 @@ class RentalRepository {
   final ApiClient _apiClient;
   final _log = Logger("RentalRepository");
 
-  @override
   Future<Result<List<Rental>>> getRentals(int customerId) async {
     return await _apiClient.getRentals(customerId);
+  }
+
+  Future<Result<void>> deleteRental(int rentalId) async {
+    return await _apiClient.deleteRental(rentalId);
   }
 
   Future<Result<PostInspectionResponse>> createInspection({

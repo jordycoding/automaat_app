@@ -80,6 +80,13 @@ class ApiClient with HttpDelegate {
     );
   }
 
+  Future<Result<void>> deleteRental(int rentalId) async {
+    return deleteRequest(
+        Uri.parse("${AppConstants.serverUrl}/rentals/$rentalId"),
+        _clientFactory,
+        _authHeader);
+  }
+
   Future<Result<PostInspectionResponse>> createInspection({
     required String code,
     required int odometer,

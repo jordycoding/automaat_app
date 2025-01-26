@@ -89,4 +89,27 @@ mixin HttpDelegate {
       client.close();
     }
   }
+
+  Future<Result<void>> deleteRequest(
+      Uri uri,
+      HttpClient Function() clientFactory,
+      Future<void> Function(HttpHeaders)? addHeaders) async {
+    final client = clientFactory();
+    try {
+      final request = await client.deleteUrl(uri);
+      if (addHeaders != null) {
+        addHeaders(request.headers);
+      }
+      final response = await request.close();
+      if (response.statusCode >= 200 && response.statusCode <= 300) {
+        return Result.ok(null);
+      } else {
+        return Result.error(Exception("Error deleting $uri"));
+      }
+    } on Exception catch (error) {
+      return Result.error(error);
+    } finally {
+      client.close();
+    }
+  }
 }

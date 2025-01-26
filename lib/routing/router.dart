@@ -6,6 +6,7 @@ import 'package:automaat_app/ui/car_list/view_model/car_list_viewmodel.dart';
 import 'package:automaat_app/ui/car_list/widgets/car_list_screen.dart';
 import 'package:automaat_app/ui/profile/view_models/past_rentals_viewmodel.dart';
 import 'package:automaat_app/ui/profile/view_models/profile_viewmodel.dart';
+import 'package:automaat_app/ui/profile/view_models/rental_detail_viewmodel.dart';
 import 'package:automaat_app/ui/profile/widgets/past_rentals_screen.dart';
 import 'package:automaat_app/ui/profile/widgets/profile_screen.dart';
 import 'package:automaat_app/ui/core/ui/scaffold_nested_navigation.dart';
@@ -138,7 +139,20 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                         final rental = Rental.fromJson(rentalJson);
                         return MaterialPage(
                           key: state.pageKey,
-                          child: RentalDetailScreen(rental: rental),
+                          child: ChangeNotifierProvider(
+                            create: (context) => RentalDetailViewmodel(
+                              rentalRepository: context.read(),
+                            ),
+                            child: Builder(
+                              builder: (context) {
+                                final rentalDetailViewModel =
+                                    context.read<RentalDetailViewmodel>();
+                                return RentalDetailScreen(
+                                    rental: rental,
+                                    viewModel: rentalDetailViewModel);
+                              },
+                            ),
+                          ),
                         );
                       },
                     ),

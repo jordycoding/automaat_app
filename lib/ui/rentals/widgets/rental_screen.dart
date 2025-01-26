@@ -76,8 +76,7 @@ class _RentalScreenState extends State<RentalScreen> {
                   );
                 }
                 return const Center(
-                  child:
-                      Text("There was an error fetching your current rentals"),
+                  child: Text("You have no rentals at the moment"),
                 );
               },
             )
