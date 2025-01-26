@@ -2,13 +2,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:automaat_app/data/services/api/model/rental/rental.dart';
+import 'package:automaat_app/ui/rentals/view_models/inspection_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:go_router/go_router.dart';
 
 class InspectionScreen extends StatefulWidget {
   final Rental rental;
+  final InspectionViewmodel viewModel;
 
-  const InspectionScreen({super.key, required this.rental});
+  const InspectionScreen(
+      {super.key, required this.rental, required this.viewModel});
 
   @override
   State<InspectionScreen> createState() => _InspectionScreen();
@@ -25,6 +29,25 @@ class _InspectionScreen extends State<InspectionScreen> {
   final TextEditingController _odometerController = TextEditingController();
   final TextEditingController _resultController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.viewModel.postInspection.addListener(_onResult);
+  }
+
+  @override
+  void didUpdateWidget(covariant InspectionScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    oldWidget.viewModel.postInspection.removeListener(_onResult);
+    widget.viewModel.postInspection.addListener(_onResult);
+  }
+
+  @override
+  void dispose() {
+    widget.viewModel.postInspection.removeListener(_onResult);
+    super.dispose();
+  }
 
   String? _validateImage() {
     if (_imageFile == null) {
@@ -84,6 +107,23 @@ class _InspectionScreen extends State<InspectionScreen> {
     return 'application/octet-stream'; // Default fallback
   }
 
+  void _submitForm() {
+    if (_formKey.currentState!.validate()) {
+      widget.viewModel.postInspection.execute(
+        (
+          _codeController.value.text,
+          _odometerController.value.text,
+          _resultController.value.text,
+          _descriptionController.value.text,
+          "${selectedDate.toIso8601String()}Z",
+          _imageBase64,
+          _imageContentType,
+          widget.rental.car?.id,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final rental = widget.rental;
@@ -117,6 +157,7 @@ class _InspectionScreen extends State<InspectionScreen> {
                     ),
                     TextFormField(
                       controller: _odometerController,
+                      keyboardType: TextInputType.number,
                       decoration: const InputDecoration(
                         border: UnderlineInputBorder(),
                         labelText: "Odometer",
@@ -192,7 +233,7 @@ class _InspectionScreen extends State<InspectionScreen> {
                   minimumSize: const Size.fromHeight(40),
                 ),
                 onPressed: () {
-                  _formKey.currentState!.validate();
+                  _submitForm();
                 },
                 child: const Text("Submit"),
               ),
@@ -201,5 +242,37 @@ class _InspectionScreen extends State<InspectionScreen> {
         ),
       ),
     );
+  }
+
+  void _onResult() async {
+    if (widget.viewModel.postInspection.completed) {
+      widget.viewModel.postInspection.clearResult();
+      await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Success"),
+            content: const Text("Your inspection was created succesfully"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  context.pop();
+                },
+                child: const Text("Ok"),
+              ),
+            ],
+          );
+        },
+      );
+    }
+    if (widget.viewModel.postInspection.error) {
+      widget.viewModel.postInspection.clearResult();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("There was an error creating your inspection"),
+        ),
+      );
+    }
   }
 }
