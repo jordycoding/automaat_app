@@ -68,7 +68,7 @@ void _showSnackbar(String title, String body) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('$title: $body'),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
