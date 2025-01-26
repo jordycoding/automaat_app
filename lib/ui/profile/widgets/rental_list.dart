@@ -20,8 +20,11 @@ class RentalList extends StatelessWidget {
             children: <Widget>[
               ListTile(
                 leading: const Icon(Icons.car_rental),
-                title: Text("Rental"),
-                subtitle: Text("From ${item.fromDate} ${item.toDate}"),
+                title: Text(item.car != null
+                    ? "${item.car!.brand} ${item.car!.model} (${item.car!.modelYear})"
+                    : "Rental ${item.code}"),
+                subtitle: Text(
+                    "From ${item.fromDate} ${item.toDate} ${item.state?.name[0].toUpperCase()}${item.state?.name.substring(1)}"),
               )
             ],
           ),

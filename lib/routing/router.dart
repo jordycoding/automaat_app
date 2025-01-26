@@ -15,6 +15,8 @@ import 'package:automaat_app/ui/register/view_models/register_viewmodel.dart';
 import 'package:automaat_app/ui/register/widgets/register_screen.dart';
 import 'package:automaat_app/ui/car_detail/view_model/car_detail_viewmodel.dart';
 import 'package:automaat_app/ui/car_detail/widgets/car_detail_screen.dart';
+import 'package:automaat_app/ui/rentals/view_models/rental_viewmodel.dart';
+import 'package:automaat_app/ui/rentals/widgets/rental_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +28,8 @@ final _shellNavigatoProfileKey =
     GlobalKey<NavigatorState>(debugLabel: "shellProfile");
 final _shellNavigatorCarsKey =
     GlobalKey<NavigatorState>(debugLabel: "shellCars");
+final _shellNavigatorRentalsKey =
+    GlobalKey<NavigatorState>(debugLabel: "shellRentals");
 
 GoRouter router(AuthRepository authRepository) => GoRouter(
       initialLocation: AppRoutes.login,
@@ -85,6 +89,47 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
               ],
             ),
             StatefulShellBranch(
+              navigatorKey: _shellNavigatorCarsKey,
+              routes: [
+                GoRoute(
+                  path: AppRoutes.carList,
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    child: ChangeNotifierProvider(
+                      create: (context) => CarListViewModel(
+                        repository: context.read<CarRepository>(),
+                      )..loadCars(),
+                      child: const CarListScreen(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            StatefulShellBranch(
+              navigatorKey: _shellNavigatorRentalsKey,
+              routes: [
+                GoRoute(
+                  path: AppRoutes.rentals,
+                  pageBuilder: (context, state) => NoTransitionPage(
+                    child: ChangeNotifierProvider(
+                      create: (context) => RentalViewModel(
+                        profileRepository: context.read(),
+                        rentalRepository: context.read(),
+                      ),
+                      child: Builder(
+                        builder: (context) {
+                          final rentalViewModel =
+                              context.read<RentalViewModel>();
+                          return RentalScreen(
+                            viewModel: rentalViewModel,
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            StatefulShellBranch(
               navigatorKey: _shellNavigatoProfileKey,
               routes: [
                 GoRoute(
@@ -133,22 +178,6 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                     )
                   ],
                 )
-              ],
-            ),
-            StatefulShellBranch(
-              navigatorKey: _shellNavigatorCarsKey,
-              routes: [
-                GoRoute(
-                  path: AppRoutes.carList,
-                  pageBuilder: (context, state) => NoTransitionPage(
-                    child: ChangeNotifierProvider(
-                      create: (context) => CarListViewModel(
-                        repository: context.read<CarRepository>(),
-                      )..loadCars(),
-                      child: const CarListScreen(),
-                    ),
-                  ),
-                ),
               ],
             ),
           ],
