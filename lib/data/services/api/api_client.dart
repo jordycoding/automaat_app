@@ -38,6 +38,16 @@ class ApiClient with HttpDelegate {
     );
   }
 
+  Future<Result<Car>> getCar(int id) async {
+    return getRequest(
+      Uri.parse("${AppConstants.serverUrl}/car/$id"),
+      _clientFactory,
+      (Map<String, dynamic> json) => Car.fromJson(json),
+      null,
+      _authHeader,
+    );
+  }
+
   // Customer endpoints
   Future<Result<CustomerResource>> customerMe() async {
     return getRequest(
