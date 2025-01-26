@@ -114,14 +114,13 @@ class CarDetailViewModel extends ChangeNotifier {
       );
 
       if (result is Ok<Rental>) {
-        _logger.info('Reservation created: ${result.value.id}');
+        _logger.info('Reservation created successfully');
       } else if (result is Error<Rental>) {
         _reservationError = result.error;
-        _logger.warning('Reservation error: ${result.error}');
       }
     } catch (e, stackTrace) {
-      _reservationError = e;
-      _logger.severe('Critical reservation error', e, stackTrace);
+      _reservationError = 'Reservation failed';
+      _logger.severe('Error during reservation', e, stackTrace);
     } finally {
       _isReserving = false;
       notifyListeners();

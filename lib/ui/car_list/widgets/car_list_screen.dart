@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/config/constants.dart';
 import 'package:automaat_app/ui/car_list/view_model/car_list_viewmodel.dart';
+import 'dart:convert';
+import 'dart:typed_data';
 
 class CarListScreen extends StatelessWidget {
   const CarListScreen({super.key});
@@ -59,10 +61,7 @@ class CarListScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: viewModel.cars[index].picture.isNotEmpty
-                      ? Image.network(
-                          '${AppConstants.serverUrl}/${viewModel.cars[index].picture}',
-                          fit: BoxFit.cover,
-                        )
+                      ? _buildBase64Image(viewModel.cars[index].picture)
                       : const Icon(Icons.directions_car, size: 30),
                 ),
                 title: Text(
@@ -103,5 +102,23 @@ class CarListScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget _buildBase64Image(String base64String) {
+    try {
+      return Image.memory(
+        base64Decode(base64String),
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => Container(
+          color: Colors.grey[200],
+          child: const Icon(Icons.error_outline, color: Colors.red),
+        ),
+      );
+    } catch (e) {
+      return Container(
+        color: Colors.grey[200],
+        child: const Icon(Icons.error_outline, color: Colors.red),
+      );
+    }
   }
 }

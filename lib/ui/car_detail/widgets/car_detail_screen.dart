@@ -4,12 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/car_detail/view_model/car_detail_viewmodel.dart';
 import 'package:automaat_app/data/services/api/model/car_list/car_list.dart';
-import 'package:automaat_app/data/repositories/car_list/car_repository.dart';
-import 'package:automaat_app/data/repositories/rental/rental_repository.dart';
-import 'package:automaat_app/data/repositories/profile/profile_repository.dart'; 
 
 class CarDetailScreen extends StatelessWidget {
-const CarDetailScreen({super.key});
+  const CarDetailScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +102,7 @@ const CarDetailScreen({super.key});
       firstDate: DateTime.now(),
       lastDate: DateTime.now().add(const Duration(days: 365)),
       initialDateRange: viewModel.fromDate != null && viewModel.toDate != null
-          ? DateTimeRange(
-              start: viewModel.fromDate!, end: viewModel.toDate!)
+          ? DateTimeRange(start: viewModel.fromDate!, end: viewModel.toDate!)
           : null,
     );
 
