@@ -12,6 +12,9 @@ class ProfileOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rentals = profile.rentals
+        ?.where((rental) => rental.state == RentalState.returned)
+        .toList();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -33,16 +36,14 @@ class ProfileOverview extends StatelessWidget {
           Text("State/Province: ${profile.location!.stateProvince ?? 'n/a'}"),
         ],
         const SizedBox(height: 10),
-        Text("Previous rentals",
-            style: Theme.of(context).textTheme.titleMedium),
-        if (profile.rentals == null || profile.rentals!.isEmpty)
+        if (rentals != null && rentals!.isNotEmpty)
+          Text("Previous rentals",
+              style: Theme.of(context).textTheme.titleMedium),
+        if (rentals == null || rentals!.isEmpty)
           const Text("No previous rentals")
         else ...[
           RentalList(
-            rentals: profile.rentals!
-                .where((rental) => rental.state == RentalState.returned)
-                .take(3)
-                .toList(),
+            rentals: rentals.take(3).toList(),
           ),
           const SizedBox(height: 5.0),
           FilledButton(
