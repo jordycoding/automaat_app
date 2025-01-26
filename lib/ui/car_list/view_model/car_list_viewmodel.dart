@@ -13,10 +13,12 @@ class CarListViewModel extends ChangeNotifier {
   List<Car> _cars = const [];
   Object? _error;
   bool _isLoading = false;
+  Car? _selectedCar;
 
-  List<Car> get cars => _cars; 
+  List<Car> get cars => _cars;
   Object? get error => _error;
   bool get isLoading => _isLoading;
+  Car? get selectedCar => _selectedCar;
 
   Future<void> loadCars({bool forceRefresh = false}) async {
     _isLoading = true;
@@ -44,5 +46,10 @@ class CarListViewModel extends ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  void selectCar(Car car) {
+    _selectedCar = car;
+    notifyListeners();
   }
 }

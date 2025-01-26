@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/config/constants.dart';
 import 'package:automaat_app/ui/car_list/view_model/car_list_viewmodel.dart';
 
@@ -9,23 +11,19 @@ class CarListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Available cars'),
-      ),
+      appBar: AppBar(title: const Text('Available cars')),
       body: Consumer<CarListViewModel>(
         builder: (context, viewModel, _) {
-          // Toon laadindicator
           if (viewModel.isLoading && viewModel.cars.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          // Toon foutmelding
           if (viewModel.error != null) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('${viewModel.error}'),
+                  Text('Error: ${viewModel.error}'),
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () => viewModel.loadCars(),
@@ -44,7 +42,15 @@ class CarListScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             itemCount: viewModel.cars.length,
             itemBuilder: (context, index) => Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
               child: ListTile(
+                onTap: () {
+                  final carId = viewModel.cars[index].id;
+                  context.go('${AppRoutes.carDetails}/$carId');
+                },
                 leading: Container(
                   width: 60,
                   height: 60,
@@ -57,19 +63,40 @@ class CarListScreen extends StatelessWidget {
                           '${AppConstants.serverUrl}/${viewModel.cars[index].picture}',
                           fit: BoxFit.cover,
                         )
-                      : const Icon(Icons.directions_car),
+                      : const Icon(Icons.directions_car, size: 30),
                 ),
                 title: Text(
                   '${viewModel.cars[index].brand} ${viewModel.cars[index].model}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),
                 ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 4),
-                    Text('€${viewModel.cars[index].price.toStringAsFixed(2)}/day'),
-                    Text('Fuel: ${viewModel.cars[index].fuel}'),
+                    Text(
+                      '€${viewModel.cars[index].price.toStringAsFixed(2)}/day',
+                      style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Text(
+                      'Fuel: ${viewModel.cars[index].fuel}',
+                      style: const TextStyle(
+                        color: Colors.black54,
+                        fontSize: 13,
+                      ),
+                    ),
                   ],
                 ),
+                contentPadding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 16,
+                ),
+                minVerticalPadding: 0,
               ),
             ),
           );
