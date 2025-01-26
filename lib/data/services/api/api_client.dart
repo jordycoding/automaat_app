@@ -3,6 +3,8 @@ import 'package:automaat_app/config/constants.dart';
 import 'package:automaat_app/data/services/api/model/car_list/car_list.dart';
 import 'package:automaat_app/data/services/api/model/car_list_holder/car_list_holder.dart';
 import 'package:automaat_app/data/services/api/model/customer_resource/customer_resource.dart';
+import 'package:automaat_app/data/services/api/model/rental/rental.dart';
+import 'package:automaat_app/data/services/api/model/rental_list_holder/rental_list_holder.dart';
 import 'package:automaat_app/utils/http_delegate.dart';
 import 'package:automaat_app/utils/result.dart';
 
@@ -58,6 +60,20 @@ class ApiClient with HttpDelegate {
       null,
       _authHeader,
       true,
+    );
+  }
+
+  Future<Result<List<Rental>>> getRentals(int customerId) async {
+    return getRequest(
+      Uri.parse("${AppConstants.serverUrl}/rentals").replace(
+        queryParameters: {
+          "customerId.equals": customerId.toString(),
+        },
+      ),
+      _clientFactory,
+      null,
+      (List<Object?> json) => (RentalListHolder.fromJson({"data": json}).data),
+      _authHeader,
     );
   }
 }

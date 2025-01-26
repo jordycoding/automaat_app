@@ -1,7 +1,7 @@
 import 'package:automaat_app/data/services/api/model/customer_resource/customer_resource.dart';
 import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:automaat_app/routing/app_routes.dart';
-import 'package:automaat_app/ui/core/profile/widgets/rental_list.dart';
+import 'package:automaat_app/ui/profile/widgets/rental_list.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,7 +47,7 @@ class ProfileOverview extends StatelessWidget {
           const SizedBox(height: 5.0),
           FilledButton(
             onPressed: () {
-              context.go(AppRoutes.pastRentals);
+              context.push("${AppRoutes.pastRentals}/${profile.id}");
             },
             child: const Text("View all rental details"),
           )

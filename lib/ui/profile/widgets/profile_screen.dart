@@ -1,5 +1,5 @@
-import 'package:automaat_app/ui/core/profile/view_models/profile_viewmodel.dart';
-import 'package:automaat_app/ui/core/profile/widgets/profile_overview.dart';
+import 'package:automaat_app/ui/profile/view_models/profile_viewmodel.dart';
+import 'package:automaat_app/ui/profile/widgets/profile_overview.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {

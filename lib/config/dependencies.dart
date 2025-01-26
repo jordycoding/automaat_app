@@ -2,6 +2,7 @@ import 'package:automaat_app/data/repositories/auth/auth_repository.dart';
 import 'package:automaat_app/data/repositories/auth/auth_repository_remote.dart';
 import 'package:automaat_app/data/repositories/profile/profile_repository.dart';
 import 'package:automaat_app/data/repositories/profile/profile_repository_remote.dart';
+import 'package:automaat_app/data/repositories/rental/rental_repository.dart';
 import 'package:automaat_app/data/services/api/api_client.dart';
 import 'package:automaat_app/data/services/api/auth_api_client.dart';
 import 'package:automaat_app/data/services/shared_preferences_service.dart';
@@ -30,6 +31,11 @@ List<SingleChildWidget> get providers {
       create: (context) => ProfileRepositoryRemote(
         apiClient: context.read(),
       ) as ProfileRepository,
+    ),
+    Provider(
+      create: (context) => RentalRepository(
+        apiClient: context.read(),
+      ),
     )
   ];
 }

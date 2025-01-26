@@ -3,9 +3,10 @@ import 'package:automaat_app/data/repositories/car_list/car_repository.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/car_list/view_model/car_list_viewmodel.dart';
 import 'package:automaat_app/ui/car_list/widgets/car_list_screen.dart';
-import 'package:automaat_app/ui/core/profile/view_models/profile_viewmodel.dart';
-import 'package:automaat_app/ui/core/profile/widgets/past_rentals_screen.dart';
-import 'package:automaat_app/ui/core/profile/widgets/profile_screen.dart';
+import 'package:automaat_app/ui/profile/view_models/past_rentals_viewmodel.dart';
+import 'package:automaat_app/ui/profile/view_models/profile_viewmodel.dart';
+import 'package:automaat_app/ui/profile/widgets/past_rentals_screen.dart';
+import 'package:automaat_app/ui/profile/widgets/profile_screen.dart';
 import 'package:automaat_app/ui/core/ui/scaffold_nested_navigation.dart';
 import 'package:automaat_app/ui/home/widgets/home_screen.dart';
 import 'package:automaat_app/ui/login/view_models/login_viewmodel.dart';
@@ -98,7 +99,7 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                       child: Builder(
                         builder: (context) {
                           final profileViewModel =
-                              context.watch<ProfileViewModel>();
+                              context.read<ProfileViewModel>();
                           return ProfileScreen(
                             viewModel: profileViewModel,
                           );
@@ -108,11 +109,27 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                   ),
                   routes: [
                     GoRoute(
-                      path: "pastRentals",
-                      pageBuilder: (context, state) => NoTransitionPage(
-                        key: state.pageKey,
-                        child: const PastRentalsScreen(),
-                      ),
+                      path: "pastRentals/:customerId",
+                      pageBuilder: (context, state) {
+                        final customerId = state.pathParameters["customerId"];
+                        return MaterialPage(
+                          key: state.pageKey,
+                          child: ChangeNotifierProvider(
+                            create: (context) => PastRentalsViewModel(
+                              rentalRepository: context.read(),
+                              customerId: customerId,
+                            ),
+                            child: Builder(
+                              builder: (context) {
+                                final pastRentalsViewModel =
+                                    context.read<PastRentalsViewModel>();
+                                return PastRentalsScreen(
+                                    viewModel: pastRentalsViewModel);
+                              },
+                            ),
+                          ),
+                        );
+                      },
                     )
                   ],
                 )
