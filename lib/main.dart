@@ -4,6 +4,7 @@ import 'package:automaat_app/data/services/api/api_client.dart';
 import 'package:automaat_app/firebase_options.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/routing/router.dart';
+import 'package:automaat_app/utils/connectivity_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
