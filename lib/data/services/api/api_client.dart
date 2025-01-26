@@ -5,7 +5,6 @@ import 'package:automaat_app/data/services/api/model/car_list_holder/car_list_ho
 import 'package:automaat_app/data/services/api/model/customer_resource/customer_resource.dart';
 import 'package:automaat_app/utils/http_delegate.dart';
 import 'package:automaat_app/utils/result.dart';
-import 'package:logging/logging.dart';
 
 typedef AuthHeaderProvider = String? Function();
 
@@ -16,7 +15,6 @@ class ApiClient with HttpDelegate {
 
   final HttpClient Function() _clientFactory;
   AuthHeaderProvider? _authHeaderProvider;
-  final Logger _log = Logger("ApiClient");
 
   set authHeaderProvider(AuthHeaderProvider? value) {
     _authHeaderProvider = value;
@@ -35,10 +33,8 @@ class ApiClient with HttpDelegate {
       Uri.parse("${AppConstants.serverUrl}/cars"),
       _clientFactory,
       null,
-      (List<dynamic> json) => (CarListHolder.fromJson({"data": json}).data),
+      (List<Object?> json) => (CarListHolder.fromJson({"data": json}).data),
       _authHeader,
-      false,
-      _log,
     );
   }
 

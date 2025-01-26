@@ -12,6 +12,8 @@ import 'package:automaat_app/ui/login/view_models/login_viewmodel.dart';
 import 'package:automaat_app/ui/login/widgets/login_screen.dart';
 import 'package:automaat_app/ui/register/view_models/register_viewmodel.dart';
 import 'package:automaat_app/ui/register/widgets/register_screen.dart';
+import 'package:automaat_app/ui/car_detail/view_model/car_detail_viewmodel.dart';
+import 'package:automaat_app/ui/car_detail/widgets/car_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +33,23 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
       redirect: _redirect,
       refreshListenable: authRepository,
       routes: [
+        GoRoute(
+          path: '${AppRoutes.carDetails}/:carId',
+          builder: (context, state) {
+            final carId = int.parse(state.pathParameters['carId']!);
+            return MultiProvider(
+              providers: [
+                ChangeNotifierProvider(
+                  create: (context) => CarDetailViewModel(
+                    repository: context.read<CarRepository>(),
+                    carId: carId,
+                  ),
+                ),
+              ],
+              child: const CarDetailScreen(),
+            );
+          },
+        ),
         GoRoute(
           path: AppRoutes.login,
           builder: (context, state) => LoginScreen(
