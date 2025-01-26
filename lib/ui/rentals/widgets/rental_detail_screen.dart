@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:automaat_app/data/services/api/model/rental/rental.dart';
+import 'package:automaat_app/routing/app_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RentalDetailScreen extends StatefulWidget {
   final Rental rental;
@@ -66,7 +68,10 @@ class _RentalDetailScreenState extends State<RentalDetailScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   FilledButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(AppRoutes.rentalInspection,
+                          extra: widget.rental.toJson());
+                    },
                     child: const Text("File inspection"),
                   ),
                   FilledButton(

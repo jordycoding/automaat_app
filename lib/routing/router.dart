@@ -17,6 +17,7 @@ import 'package:automaat_app/ui/register/widgets/register_screen.dart';
 import 'package:automaat_app/ui/car_detail/view_model/car_detail_viewmodel.dart';
 import 'package:automaat_app/ui/car_detail/widgets/car_detail_screen.dart';
 import 'package:automaat_app/ui/rentals/view_models/rental_viewmodel.dart';
+import 'package:automaat_app/ui/rentals/widgets/inspection_screen.dart';
 import 'package:automaat_app/ui/rentals/widgets/rental_detail_screen.dart';
 import 'package:automaat_app/ui/rentals/widgets/rental_screen.dart';
 import 'package:flutter/material.dart';
@@ -139,7 +140,18 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                           child: RentalDetailScreen(rental: rental),
                         );
                       },
-                    )
+                    ),
+                    GoRoute(
+                      path: "inspection",
+                      pageBuilder: (context, state) {
+                        final rentalJson = state.extra as Map<String, dynamic>;
+                        final rental = Rental.fromJson(rentalJson);
+                        return MaterialPage(
+                          key: state.pageKey,
+                          child: InspectionScreen(rental: rental),
+                        );
+                      },
+                    ),
                   ],
                 )
               ],
