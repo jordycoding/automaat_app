@@ -5,7 +5,9 @@ import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/profile/view_models/rental_detail_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
 
 class RentalDetailScreen extends StatefulWidget {
   final Rental rental;
@@ -86,6 +88,45 @@ class _RentalDetailScreenState extends State<RentalDetailScreen> {
               Text(
                   "State: ${widget.rental.state?.name[0].toUpperCase()}${widget.rental.state?.name.substring(1).toLowerCase()}"),
               const SizedBox(height: 10),
+              Text("Location", style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 5),
+              if (widget.rental.latitude.isFinite &&
+                  widget.rental.longitude.isFinite &&
+                  !widget.rental.latitude.isNaN &&
+                  !widget.rental.longitude.isNaN)
+                Container(
+                  height: 600,
+                  alignment: Alignment.center,
+    padding: const EdgeInsets.all(16.0),
+                  child: FlutterMap(
+                    options: MapOptions(
+                        initialCenter: LatLng(
+                            widget.rental.latitude, widget.rental.longitude),
+                        initialZoom: 9),
+                    children: [
+                      TileLayer(
+                        urlTemplate:
+                            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        userAgentPackageName: "com.example.automaat_app",
+                      ),
+                      MarkerLayer(
+                        markers: [
+                          Marker(
+                            point: LatLng(widget.rental.latitude,
+                                widget.rental.longitude),
+                            width: 60,
+                            height: 60,
+                            child: const Icon(
+                              Icons.car_rental,
+                              size: 60,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
