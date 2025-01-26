@@ -15,5 +15,5 @@ _$CarListHolderImpl _$$CarListHolderImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$CarListHolderImplToJson(_$CarListHolderImpl instance) =>
     <String, dynamic>{
-      'data': instance.data,
+      'data': instance.data.map((e) => e.toJson()).toList(),
     };

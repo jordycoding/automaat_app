@@ -34,9 +34,9 @@ Map<String, dynamic> _$$RentalImplToJson(_$RentalImpl instance) =>
       'fromDate': instance.fromDate,
       'toDate': instance.toDate,
       'state': _$RentalStateEnumMap[instance.state],
-      'inspections': instance.inspections,
-      'customer': instance.customer,
-      'car': instance.car,
+      'inspections': instance.inspections?.map((e) => e.toJson()).toList(),
+      'customer': instance.customer?.toJson(),
+      'car': instance.car?.toJson(),
     };
 
 const _$RentalStateEnumMap = {

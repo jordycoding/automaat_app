@@ -2,9 +2,10 @@ import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:flutter/material.dart';
 
 class RentalList extends StatelessWidget {
-  const RentalList({super.key, required this.rentals});
+  const RentalList({super.key, required this.rentals, this.onClick});
 
   final List<Rental> rentals;
+  final Function(dynamic item)? onClick;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,11 @@ class RentalList extends StatelessWidget {
                     : "Rental ${item.code}"),
                 subtitle: Text(
                     "From ${item.fromDate} ${item.toDate} ${item.state?.name[0].toUpperCase()}${item.state?.name.substring(1)}"),
+                onTap: () {
+                  if (onClick != null) {
+                    onClick!(item);
+                  }
+                },
               )
             ],
           ),

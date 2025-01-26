@@ -33,7 +33,7 @@ Map<String, dynamic> _$$CustomerResourceImplToJson(
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'from': instance.from,
-      'systemUser': instance.systemUser,
-      'rentals': instance.rentals,
-      'location': instance.location,
+      'systemUser': instance.systemUser?.toJson(),
+      'rentals': instance.rentals?.map((e) => e.toJson()).toList(),
+      'location': instance.location?.toJson(),
     };

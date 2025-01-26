@@ -17,5 +17,5 @@ _$RentalListHolderImpl _$$RentalListHolderImplFromJson(
 Map<String, dynamic> _$$RentalListHolderImplToJson(
         _$RentalListHolderImpl instance) =>
     <String, dynamic>{
-      'data': instance.data,
+      'data': instance.data.map((e) => e.toJson()).toList(),
     };

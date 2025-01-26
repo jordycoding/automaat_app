@@ -1,5 +1,6 @@
 import 'package:automaat_app/data/repositories/auth/auth_repository.dart';
 import 'package:automaat_app/data/repositories/car_list/car_repository.dart';
+import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/car_list/view_model/car_list_viewmodel.dart';
 import 'package:automaat_app/ui/car_list/widgets/car_list_screen.dart';
@@ -16,6 +17,7 @@ import 'package:automaat_app/ui/register/widgets/register_screen.dart';
 import 'package:automaat_app/ui/car_detail/view_model/car_detail_viewmodel.dart';
 import 'package:automaat_app/ui/car_detail/widgets/car_detail_screen.dart';
 import 'package:automaat_app/ui/rentals/view_models/rental_viewmodel.dart';
+import 'package:automaat_app/ui/rentals/widgets/rental_detail_screen.dart';
 import 'package:automaat_app/ui/rentals/widgets/rental_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -126,6 +128,19 @@ GoRouter router(AuthRepository authRepository) => GoRouter(
                       ),
                     ),
                   ),
+                  routes: [
+                    GoRoute(
+                      path: "details",
+                      pageBuilder: (context, state) {
+                        final rentalJson = state.extra as Map<String, dynamic>;
+                        final rental = Rental.fromJson(rentalJson);
+                        return MaterialPage(
+                          key: state.pageKey,
+                          child: RentalDetailScreen(rental: rental),
+                        );
+                      },
+                    )
+                  ],
                 )
               ],
             ),

@@ -1,6 +1,9 @@
+import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/profile/widgets/rental_list.dart';
 import 'package:automaat_app/ui/rentals/view_models/rental_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:logging/logging.dart';
 
 class RentalScreen extends StatefulWidget {
   const RentalScreen({super.key, required this.viewModel});
@@ -12,6 +15,8 @@ class RentalScreen extends StatefulWidget {
 }
 
 class _RentalScreenState extends State<RentalScreen> {
+  final _log = Logger("Rental screen");
+
   @override
   void initState() {
     super.initState();
@@ -58,7 +63,16 @@ class _RentalScreenState extends State<RentalScreen> {
                 if (rentals.isNotEmpty) {
                   return Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: RentalList(rentals: rentals),
+                    child: RentalList(
+                      rentals: rentals,
+                      onClick: (rental) {
+                        _log.info(rental);
+                        context.push(
+                          AppRoutes.rentalDetails,
+                          extra: rental.toJson(),
+                        );
+                      },
+                    ),
                   );
                 }
                 return const Center(
