@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:automaat_app/routing/app_routes.dart';
 import 'package:automaat_app/ui/car_detail/view_model/car_detail_viewmodel.dart';
 import 'package:automaat_app/data/services/api/model/car_list/car_list.dart';
+import 'dart:convert';
 
 class CarDetailScreen extends StatelessWidget {
   const CarDetailScreen({super.key});
@@ -44,18 +45,37 @@ class CarDetailScreen extends StatelessWidget {
   }
 
   Widget _buildCarDetails(BuildContext context, Car car) {
-    return Expanded(
-      child: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          Text(car.model, style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 8),
-          Text('Year: ${car.modelYear}'),
-          Text('Price per day: \$${car.price}'),
-        ],
-      ),
-    );
-  }
+  return Expanded(
+    child: ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        // Voeg hier de afbeelding toe
+        SizedBox(
+          height: 200, // Pas de hoogte aan naar wens
+          child: car.picture.isNotEmpty
+              ? Image.memory(
+                  base64Decode(car.picture),
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    color: Colors.grey[200],
+                    child: const Icon(Icons.error_outline, color: Colors.red),
+                  ),
+                )
+              : Container(
+                  color: Colors.grey[200],
+                  child: const Icon(Icons.directions_car, size: 50),
+                ),
+        ),
+        const SizedBox(height: 16),
+        // Bestaande details
+        Text(car.model, style: Theme.of(context).textTheme.headlineSmall),
+        const SizedBox(height: 8),
+        Text('Year: ${car.modelYear}'),
+        Text('Price per day: \$${car.price}'),
+      ],
+    ),
+  );
+}
 
   Widget _buildReservationSection(
       BuildContext context, CarDetailViewModel viewModel) {
