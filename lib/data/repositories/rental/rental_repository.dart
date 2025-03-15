@@ -19,6 +19,12 @@ class RentalRepository {
     return await _apiClient.deleteRental(rentalId);
   }
 
+  Future<Result<Rental>> patchRentalLocation(
+      int rentalId, double latitude, double longitude) async {
+    return await _apiClient.patchRentalLocation(
+        rentalId: rentalId, latitude: latitude, longitude: longitude);
+  }
+
   Future<Result<Rental>> createRental({
     required int carId,
     required DateTime startDate,

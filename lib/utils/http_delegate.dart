@@ -143,7 +143,7 @@ mixin HttpDelegate {
         addHeaders(request.headers);
       }
       request.headers.contentType = ContentType.json;
-      request.write(body);
+      request.write(jsonEncode(body));
       final response = await request.close();
       if (response.statusCode >= 200 && response.statusCode <= 300) {
         if (fromJson == null && fromList == null) {

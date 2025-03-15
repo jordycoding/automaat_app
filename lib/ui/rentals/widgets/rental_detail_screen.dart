@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:automaat_app/routing/app_routes.dart';
+import 'package:automaat_app/ui/core/ui/input_dialog.dart';
 import 'package:automaat_app/ui/profile/view_models/rental_detail_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -25,18 +26,22 @@ class _RentalDetailScreenState extends State<RentalDetailScreen> {
   void initState() {
     super.initState();
     widget.viewModel.deleteRental.addListener(_onResult);
+    widget.viewModel.patchRentalLocation.addListener(_onResult);
   }
 
   @override
   void didUpdateWidget(covariant RentalDetailScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     oldWidget.viewModel.deleteRental.removeListener(_onResult);
+    oldWidget.viewModel.patchRentalLocation.removeListener(_onResult);
     widget.viewModel.deleteRental.addListener(_onResult);
+    widget.viewModel.patchRentalLocation.addListener(_onResult);
   }
 
   @override
   void dipsose() {
     widget.viewModel.deleteRental.removeListener(_onResult);
+    widget.viewModel.patchRentalLocation.removeListener(_onResult);
     super.dispose();
   }
 
@@ -97,7 +102,7 @@ class _RentalDetailScreenState extends State<RentalDetailScreen> {
                 Container(
                   height: 600,
                   alignment: Alignment.center,
-    padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: FlutterMap(
                     options: MapOptions(
                         initialCenter: LatLng(
@@ -127,6 +132,32 @@ class _RentalDetailScreenState extends State<RentalDetailScreen> {
                     ],
                   ),
                 ),
+              OutlinedButton(
+                onPressed: () async {
+                  final result = await displayInputDialog(
+                      context, "Location", "Latitude", true, "Longitude", true);
+                  if (result != null) {
+                    final (lat, long) = result;
+                    if (lat != null &&
+                        long != null &&
+                        lat.isNotEmpty &&
+                        long.isNotEmpty) {
+                      widget.viewModel.patchRentalLocation.execute(
+                        (
+                          widget.rental.id,
+                          double.parse(lat),
+                          double.parse(long)
+                        ),
+                      );
+                    }
+                  }
+                },
+                style: OutlinedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(40),
+                ),
+                child: const Text("Update location"),
+              ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -209,6 +240,22 @@ class _RentalDetailScreenState extends State<RentalDetailScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("There was an error deleting the rental"),
+        ),
+      );
+    }
+    if (widget.viewModel.patchRentalLocation.completed) {
+      widget.viewModel.patchRentalLocation.clearResult();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("The location has been updated"),
+        ),
+      );
+    }
+    if (widget.viewModel.patchRentalLocation.error) {
+      widget.viewModel.patchRentalLocation.clearResult();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("There was an error updating the location"),
         ),
       );
     }

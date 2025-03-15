@@ -8,6 +8,7 @@ import 'package:automaat_app/data/services/api/model/post_inspection_request/pos
 import 'package:automaat_app/data/services/api/model/post_inspection_response/post_inspection_response.dart';
 import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:automaat_app/data/services/api/model/rental_list_holder/rental_list_holder.dart';
+import 'package:automaat_app/data/services/api/model/rental_location_patch/rental_location_patch.dart';
 import 'package:automaat_app/data/services/shared_preferences_service.dart';
 import 'package:automaat_app/utils/http_delegate.dart';
 import 'package:automaat_app/utils/result.dart';
@@ -50,7 +51,7 @@ class ApiClient with HttpDelegate {
     );
   }
 
-    Future<Result<Car>> getCarDetails(int carId) async {
+  Future<Result<Car>> getCarDetails(int carId) async {
     return getRequest(
       Uri.parse("${AppConstants.serverUrl}/cars/$carId"),
       _clientFactory,
@@ -85,7 +86,7 @@ class ApiClient with HttpDelegate {
     );
   }
 
-    Future<Result<Rental>> createRental({
+  Future<Result<Rental>> createRental({
     required int carId,
     required int customerId,
     required DateTime startDate,
@@ -104,6 +105,25 @@ class ApiClient with HttpDelegate {
       null,
       null,
       RequestType.json,
+      _authHeader,
+    );
+  }
+
+  Future<Result<Rental>> patchRentalLocation({
+    required int rentalId,
+    required double latitude,
+    required double longitude,
+  }) async {
+    return patchRequest(
+      Uri.parse("${AppConstants.serverUrl}/rentals/$rentalId"),
+      _clientFactory,
+      RentalLocationPatch(
+        id: rentalId,
+        longitude: longitude,
+        latitude: latitude,
+      ),
+      Rental.fromJson,
+      null,
       _authHeader,
     );
   }
