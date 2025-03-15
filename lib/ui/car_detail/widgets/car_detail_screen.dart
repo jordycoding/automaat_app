@@ -132,26 +132,25 @@ class CarDetailScreen extends StatelessWidget {
   }
 
   Future<void> _confirmReservation(
-      BuildContext context, CarDetailViewModel viewModel) async {
-    await viewModel.reserveCar();
-    
-    if (context.mounted) {
-      final success = viewModel.reservationError == null;
-      
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            success
-                ? 'Reservation successful!'
-                : 'Failed to reserve: ${viewModel.reservationError}',
-          ),
-          backgroundColor: success ? Colors.green : Colors.red,
-        ),
-      );
+    BuildContext context, CarDetailViewModel viewModel) async {
+  await viewModel.reserveCar();
 
-      if (success) {
-        context.go(AppRoutes.carList);
-      }
+  if (context.mounted) {
+    final success = viewModel.reservationError == null;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          success
+              ? 'Reservation successful!'
+              : 'Failed to reserve: ${viewModel.reservationError}',
+        ),
+        backgroundColor: success ? Colors.green : Colors.red,
+      ),
+    );
+
+    if (success) {
+      context.go(AppRoutes.carList);
     }
   }
+}
 }

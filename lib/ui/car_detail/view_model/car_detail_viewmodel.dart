@@ -7,6 +7,7 @@ import 'package:automaat_app/data/repositories/profile/profile_repository.dart';
 import 'package:automaat_app/data/services/api/model/car_list/car_list.dart';
 import 'package:automaat_app/data/services/api/model/rental/rental.dart';
 import 'package:automaat_app/data/services/api/model/customer_resource/customer_resource.dart';
+import 'package:location/location.dart'; // Gebruik de location package
 
 class CarDetailViewModel extends ChangeNotifier {
   final CarRepository carRepository;
@@ -49,10 +50,14 @@ class CarDetailViewModel extends ChangeNotifier {
   Future<void> _loadCustomerId() async {
     try {
       final result = await profileRepository.getProfile();
+      _logger.info('ProfileRepository.getProfile() result: $result');
+
       if (result is Ok<CustomerResource>) {
         _customerId = result.value.id;
+        _logger.fine('Customer ID set to $_customerId');
       } else if (result is Error<CustomerResource>) {
         _error = result.error;
+        _logger.warning('Error getting customer profile: ${result.error}');
       }
     } catch (e, stackTrace) {
       _error = e;
@@ -68,10 +73,11 @@ class CarDetailViewModel extends ChangeNotifier {
 
     try {
       final result = await carRepository.fetchCarDetails(carId);
-      
+      _logger.info('Result of fetchCarDetails($carId): $result');
+
       if (result is Ok<Car>) {
         _car = result.value;
-        _logger.fine('Loaded car details: ${result.value.id}');
+        _logger.fine('Loaded car details: ${_car?.id}, model: ${_car?.model}');
       } else if (result is Error<Car>) {
         _error = result.error;
         _car = null;
@@ -90,12 +96,19 @@ class CarDetailViewModel extends ChangeNotifier {
   void setDates(DateTime from, DateTime to) {
     _fromDate = from;
     _toDate = to;
+    _logger.info('Dates set: from $_fromDate to $_toDate');
     notifyListeners();
   }
 
   Future<void> reserveCar() async {
-    if (_fromDate == null || _toDate == null) return;
+    if (_fromDate == null || _toDate == null) {
+      _logger.warning('Cannot reserve: fromDate or toDate is null');
+      _reservationError = 'Selecteer eerst de datums';
+      notifyListeners();
+      return;
+    }
     if (_customerId == null) {
+      _logger.warning('Cannot reserve: customerId is null');
       _reservationError = 'Customer not authenticated';
       notifyListeners();
       return;
@@ -106,17 +119,30 @@ class CarDetailViewModel extends ChangeNotifier {
     notifyListeners();
 
     try {
+      // Haal de huidige locatie op met het location package
+      final Location location = Location();
+      final LocationData locationData = await location.getLocation();
+      final double currentLatitude = locationData.latitude ?? 0.0;
+      final double currentLongitude = locationData.longitude ?? 0.0;
+      _logger.info('Current location: lat=$currentLatitude, long=$currentLongitude');
+
+      // Roep de createRental methode in de repository aan en geef de locatie mee.
       final result = await rentalRepository.createRental(
         carId: carId,
         customerId: _customerId!,
         startDate: _fromDate!,
         endDate: _toDate!,
+        currentLatitude: currentLatitude,
+        currentLongitude: currentLongitude,
       );
 
+      _logger.info('Result of createRental: $result');
+
       if (result is Ok<Rental>) {
-        _logger.info('Reservation created successfully');
+        _logger.info('Reservation created successfully: ${result.value.id}');
       } else if (result is Error<Rental>) {
         _reservationError = result.error;
+        _logger.warning('Reservation error: ${result.error}');
       }
     } catch (e, stackTrace) {
       _reservationError = 'Reservation failed';
@@ -130,5 +156,11 @@ class CarDetailViewModel extends ChangeNotifier {
   void clearReservationError() {
     _reservationError = null;
     notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    _logger.info('CarDetailViewModel with carId=$carId is being disposed');
+    super.dispose();
   }
 }

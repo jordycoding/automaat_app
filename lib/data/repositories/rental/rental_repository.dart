@@ -26,18 +26,22 @@ class RentalRepository {
   }
 
   Future<Result<Rental>> createRental({
-    required int carId,
-    required DateTime startDate,
-    required DateTime endDate,
-    required int customerId,
-  }) async {
-    return await _apiClient.createRental(
-      carId: carId,
-      startDate: startDate,
-      endDate: endDate,
-      customerId: customerId,
-    );
-  }
+  required int carId,
+  required int customerId,
+  required DateTime startDate,
+  required DateTime endDate,
+  required double currentLatitude,
+  required double currentLongitude,
+}) async {
+  return await _apiClient.createRental(
+    carId: carId,
+    customerId: customerId,
+    startDate: startDate,
+    endDate: endDate,
+    currentLatitude: currentLatitude,
+    currentLongitude: currentLongitude,
+  );
+}
 
   Future<Result<PostInspectionResponse>> createInspection({
     required String code,

@@ -87,27 +87,39 @@ class ApiClient with HttpDelegate {
   }
 
   Future<Result<Rental>> createRental({
-    required int carId,
-    required int customerId,
-    required DateTime startDate,
-    required DateTime endDate,
-  }) async {
-    return postRequest(
-      Uri.parse("${AppConstants.serverUrl}/rentals"),
-      _clientFactory,
-      {
-        'carId': carId,
-        'customerId': customerId,
-        'startDate': startDate.toIso8601String(),
-        'endDate': endDate.toIso8601String(),
-      },
-      Rental.fromJson,
-      null,
-      null,
-      RequestType.json,
-      _authHeader,
-    );
-  }
+  required int carId,
+  required int customerId,
+  required DateTime startDate,
+  required DateTime endDate,
+  required double currentLatitude,
+  required double currentLongitude,
+}) async {
+  return postRequest(
+    Uri.parse("${AppConstants.serverUrl}/rentals"),
+    _clientFactory,
+    {
+      'carId': carId,
+      'customerId': customerId,
+      'startDate': startDate.toIso8601String(),
+      'endDate': endDate.toIso8601String(),
+    },
+    (json) {
+      final Map<String, dynamic> adjusted = Map<String, dynamic>.from(json);
+      adjusted['fromDate'] ??= startDate.toIso8601String();
+      adjusted['toDate'] ??= endDate.toIso8601String();
+      adjusted['code'] ??= "RESERVED";
+      adjusted['longitude'] ??= currentLongitude;
+      adjusted['latitude'] ??= currentLatitude;
+      adjusted['state'] ??= "RESERVED";
+
+      return Rental.fromJson(adjusted);
+    },
+    null,
+    null,
+    RequestType.json,
+    _authHeader,
+  );
+}
 
   Future<Result<Rental>> patchRentalLocation({
     required int rentalId,
